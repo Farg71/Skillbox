@@ -4,7 +4,7 @@ using System;
 #endregion
 
 namespace BasicCapabilitiesCSharp
-{ 
+{
     class Program
     {
         static void Main(string[] args)
@@ -16,30 +16,49 @@ namespace BasicCapabilitiesCSharp
             float gradeMath = 99.95f;                           // оценка по математике
             float gradePhisics = 34.11f;                        // оценка по физике
 
-            Console.Clear();
-            Console.Write("Введите номер домашнего задания ('1' или '2'; другие - завершение проверки): ");
+            string taskNumber = "1";
 
-            Console.WriteLine($"Студент: {fullName}, возраст: {age}, эллектронный адрес: {eMail}.");
-            Console.ReadKey();
+            while (taskNumber == "1" || taskNumber == "2")
+            {
+                Console.Clear();
+                Console.Write("Введите номер домашнего задания ('1' или '2'; другие - завершение проверки): ");
 
-            var summGrades = gradeMath + gradePhisics + gradeProgramming;
-            var averageGrades = (double) summGrades / 3d;
+                taskNumber = Console.ReadLine();
 
-            var pattern = "Студент {0} набрал суииу баллов - {1} и получил средний балл {2}";
+                switch (taskNumber)
+                {
+                    case "1":
+                        {
+                            Console.WriteLine($"Студент: {fullName}, возраст: {age}, эллектронный адрес: {eMail}.");
+                            Console.ReadKey();
+                        }
+                        break;
+
+                    case "2":
+                        {
+                            var summGrades = gradeMath + gradePhisics + gradeProgramming;
+                            var averageGrades = (double)summGrades / 3d;
+
+                            var pattern = "Студент {0} набрал суииу баллов - {1} и получил средний балл {2: 0.000}";
 
 
-            Console.WriteLine(pattern,
-                                fullName,
-                                summGrades,
-                                averageGrades);
-            Console.ReadLine();
+                            Console.WriteLine(pattern,
+                                                fullName,
+                                                summGrades,
+                                                averageGrades);
+                            Console.ReadLine();
 
+                        }
+                        break;
 
-            // Проверка GIT
+                    default:
 
-            // Вторая проверка GIT
+                        Console.WriteLine("Нет такого задания!! :)");
+                        Console.ReadLine();
 
-            
+                        break;
+                }
+            }
         }
     }
 }
