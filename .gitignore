@@ -1,0 +1,9 @@
+Console/.vs/
+Console/obj/
+Console/bin/
+2_BasicCapabilitiesCSharp/obj/
+2_BasicCapabilitiesCSharp/bin/
+2_BasicCapabilitiesCSharp/.vs/
+.vs/
+*.log
+*.suo
