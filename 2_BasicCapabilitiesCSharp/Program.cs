@@ -37,6 +37,8 @@ namespace BasicCapabilitiesCSharp
 
             // Проверка GIT
 
+            // Вторая проверка GIT
+
             
         }
     }
