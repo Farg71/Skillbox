@@ -34,6 +34,9 @@ namespace BasicCapabilitiesCSharp
                                 averageGrades);
             Console.ReadLine();
 
+
+            // Проверка GIT
+
             
         }
     }
