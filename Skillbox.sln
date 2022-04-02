@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicCapabilitiesCSharp", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyHelloWorldConsoleApp", "Console\MyHelloWorldConsoleApp.csproj", "{D6BC0005-0069-46D2-B43E-D82F176B2823}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control Structures", "Control Structures\Control Structures.csproj", "{AB75F326-90F6-460E-89C5-D47F1AC13945}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arrays", "Arrays\Arrays.csproj", "{03A227A2-71AC-4840-8D93-61247B9E9E0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{D6BC0005-0069-46D2-B43E-D82F176B2823}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6BC0005-0069-46D2-B43E-D82F176B2823}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6BC0005-0069-46D2-B43E-D82F176B2823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB75F326-90F6-460E-89C5-D47F1AC13945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB75F326-90F6-460E-89C5-D47F1AC13945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB75F326-90F6-460E-89C5-D47F1AC13945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB75F326-90F6-460E-89C5-D47F1AC13945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03A227A2-71AC-4840-8D93-61247B9E9E0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03A227A2-71AC-4840-8D93-61247B9E9E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03A227A2-71AC-4840-8D93-61247B9E9E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03A227A2-71AC-4840-8D93-61247B9E9E0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
