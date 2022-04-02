@@ -71,12 +71,12 @@ namespace ControlStructures
 
                                         if (cardValue == "j" || cardValue == "q" || cardValue == "k" || cardValue == "t")
                                         {
-                                            cardSumm = cardSumm + 10;
+                                            cardSumm += 10;
                                         }
 
                                         else if (Convert.ToInt16(cardValue) > 0 && Convert.ToInt16(cardValue) <= 10)
                                         {
-                                            cardSumm = cardSumm + Convert.ToInt16(cardValue);
+                                            cardSumm += Convert.ToInt16(cardValue);
                                         }
 
                                         else
