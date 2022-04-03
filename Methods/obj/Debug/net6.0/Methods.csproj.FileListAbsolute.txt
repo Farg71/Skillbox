@@ -1,0 +1,15 @@
+E:\VS Projects\Skillbox\Methods\bin\Debug\net6.0\Methods.exe
+E:\VS Projects\Skillbox\Methods\bin\Debug\net6.0\Methods.deps.json
+E:\VS Projects\Skillbox\Methods\bin\Debug\net6.0\Methods.runtimeconfig.json
+E:\VS Projects\Skillbox\Methods\bin\Debug\net6.0\Methods.dll
+E:\VS Projects\Skillbox\Methods\bin\Debug\net6.0\Methods.pdb
+E:\VS Projects\Skillbox\Methods\obj\Debug\net6.0\Methods.csproj.AssemblyReference.cache
+E:\VS Projects\Skillbox\Methods\obj\Debug\net6.0\Methods.GeneratedMSBuildEditorConfig.editorconfig
+E:\VS Projects\Skillbox\Methods\obj\Debug\net6.0\Methods.AssemblyInfoInputs.cache
+E:\VS Projects\Skillbox\Methods\obj\Debug\net6.0\Methods.AssemblyInfo.cs
+E:\VS Projects\Skillbox\Methods\obj\Debug\net6.0\Methods.csproj.CoreCompileInputs.cache
+E:\VS Projects\Skillbox\Methods\obj\Debug\net6.0\Methods.dll
+E:\VS Projects\Skillbox\Methods\obj\Debug\net6.0\refint\Methods.dll
+E:\VS Projects\Skillbox\Methods\obj\Debug\net6.0\Methods.pdb
+E:\VS Projects\Skillbox\Methods\obj\Debug\net6.0\Methods.genruntimeconfig.cache
+E:\VS Projects\Skillbox\Methods\obj\Debug\net6.0\ref\Methods.dll
