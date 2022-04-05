@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ControlStructures
+namespace Skillbox
 {
-    class Program
+    class ControlStructures
     {
         static void Main(string[] args)
         {

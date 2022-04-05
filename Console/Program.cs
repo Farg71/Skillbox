@@ -9,9 +9,9 @@ using System;
 /// Пространство имён
 /// Создание собственной библиотеки
 /// </summary>
-namespace MyHelloWorldConsoleApp
+namespace Skillbox
 {
-    class Program
+    class MyHelloWorldConsoleApp
     {
         /// <summary>
         /// Точка входа

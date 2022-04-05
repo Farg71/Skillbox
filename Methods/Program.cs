@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Arrays
+namespace Skillbox
 {
     class Methods
     {

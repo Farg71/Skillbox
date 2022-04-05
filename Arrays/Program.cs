@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Arrays
+namespace Skillbox
 {
-    class Program
+    class Arrays
     {
         static void Main(string[] args)
         {

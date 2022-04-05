@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Files
+namespace Skillbox
 {
-    class Methods
+    class Files
     {
         static void Main(string[] args)
         {

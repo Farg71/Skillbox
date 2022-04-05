@@ -3,9 +3,9 @@
 using System;
 #endregion
 
-namespace BasicCapabilitiesCSharp
+namespace Skillbox
 {
-    class Program
+    class BasicCapabilitiesCSharp
     {
         static void Main(string[] args)
         {
