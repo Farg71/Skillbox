@@ -1,11 +1,27 @@
 ﻿using System;
 
-namespace Skillbox
+namespace Structures
 {
-    class Structures
+    class Program
     {
         static void Main(string[] args)
         {
+            /// Разработать ежедневник.
+            /// В ежедневнике реализовать возможность 
+            /// - создания
+            /// - удаления
+            /// - реактирования 
+            /// записей
+            /// 
+            /// В отдельной записи должно быть не менее пяти полей
+            /// 
+            /// Реализовать возможность 
+            /// - Загрузки даннах из файла
+            /// - Выгрузки даннах в файл
+            /// - Добавления данных в текущий ежедневник из выбранного файла
+            /// - Импорт записей по выбранному диапазону дат
+            /// - Упорядочивания записей ежедневника по выбранному полю
+
             string? taskNumber = "1";
 
             string filePath = @"..\..\..\Staff.txt";
@@ -29,44 +45,11 @@ namespace Skillbox
                 {
                     case "1":
                         {
-                            //if (!isCatalogExists)
-                            //{
-                            //    Console.WriteLine("Справочник отсутствует!");
-                            //}
-                            //else
-                            //{
-                            //    string[] records = File.ReadAllLines(filePath);
-
-                            //    foreach (string employee in records)
-                            //    {
-                            //        string[] record = employee.Split('#');
-                            //        foreach (string cell in record)
-                            //        {
-                            //            Console.Write(cell + "\t");
-                            //            //Console.Write($"{cell,30}");
-                            //        }
-
-                            //        Console.WriteLine();
-                            //    }
-                            //}
                         }
                         break;
 
                     case "2":
                         {
-                            //if (!isCatalogExists)
-                            //{
-                            //    lastRecord = 1;
-                            //}
-                            //else
-                            //{
-                            //    string[] records = File.ReadAllLines(filePath);
-
-                            //    lastRecord = int.Parse(records[records.Length - 1].Split('#')[0]);
-                            //}
-
-                            //AddNewEmployees(filePath, lastRecord);
-
                         }
                         break;
 
@@ -82,3 +65,4 @@ namespace Skillbox
         }
     }
 }
+
