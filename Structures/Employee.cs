@@ -66,7 +66,6 @@ namespace Structures
         /// <param name="DateBirth">Дата рождения сотрудника</param>
         /// <param name="PlaceBirth">Место рождения сотрудника</param>
         public Employee(int Id, DateTime EntryTime, string FullName, int Age, int Growth, DateTime DateBirth, string PlaceBirth)
-
         {
             this.Id = Id;
             this.EntryTime = EntryTime;
@@ -76,7 +75,6 @@ namespace Structures
             this.DateBirth = DateBirth;
             this.PlaceBirth = PlaceBirth;
         }
-
 
 
     }
