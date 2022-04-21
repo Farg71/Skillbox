@@ -326,6 +326,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example_922", "C:\Users\ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example_931", "C:\Users\serge_000\Documents\Skillbox\Theme_09\Example_931\Example_931.csproj", "{7FE2483F-A402-4E5D-B6BB-B6F1B8E26C9B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UniversalKnowledge", "UniversalKnowledge", "{C183016D-2EF3-46E7-A15D-F7D54F70E605}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithms", "C:\Users\serge_000\Documents\Skillbox\Universal Knowledge\Algorithms\Algorithms.csproj", "{8FB00BD9-8860-47F7-9C38-43545DDEC838}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Theme_10_Визуальное программирование. Основы технологии Windows Presentation Foundation", "Theme_10_Визуальное программирование. Основы технологии Windows Presentation Foundation", "{8E36C511-BAB7-4DD3-86EC-F3BEF5D0651E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example_1010", "C:\Users\serge_000\Documents\Skillbox\Theme_10\Example_1010\Example_1010.csproj", "{9F2684F8-1C0B-435F-98AA-6621543E3532}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -932,6 +940,14 @@ Global
 		{7FE2483F-A402-4E5D-B6BB-B6F1B8E26C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FE2483F-A402-4E5D-B6BB-B6F1B8E26C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FE2483F-A402-4E5D-B6BB-B6F1B8E26C9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FB00BD9-8860-47F7-9C38-43545DDEC838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FB00BD9-8860-47F7-9C38-43545DDEC838}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FB00BD9-8860-47F7-9C38-43545DDEC838}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FB00BD9-8860-47F7-9C38-43545DDEC838}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F2684F8-1C0B-435F-98AA-6621543E3532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F2684F8-1C0B-435F-98AA-6621543E3532}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F2684F8-1C0B-435F-98AA-6621543E3532}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F2684F8-1C0B-435F-98AA-6621543E3532}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1089,6 +1105,9 @@ Global
 		{8E7DA095-4A93-48FC-B9E7-2FFFD75ED796} = {5067234F-EC97-4F55-9E2B-99742800F3B1}
 		{B9BBD8B6-A98F-4AC3-8E83-4A9BDB1C61CC} = {5067234F-EC97-4F55-9E2B-99742800F3B1}
 		{7FE2483F-A402-4E5D-B6BB-B6F1B8E26C9B} = {5067234F-EC97-4F55-9E2B-99742800F3B1}
+		{8FB00BD9-8860-47F7-9C38-43545DDEC838} = {C183016D-2EF3-46E7-A15D-F7D54F70E605}
+		{8E36C511-BAB7-4DD3-86EC-F3BEF5D0651E} = {1D157971-8DC1-4EDD-A9D7-6D2389D30CB6}
+		{9F2684F8-1C0B-435F-98AA-6621543E3532} = {8E36C511-BAB7-4DD3-86EC-F3BEF5D0651E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16D506D9-F27F-4B90-96D3-BCA60E6EAAD8}

@@ -14,37 +14,37 @@ namespace Structures
         /// <summary>
         /// ID сотрудника
         /// </summary>
-        public int Id { get; set; }
+        public int Id;
 
         /// <summary>
         /// Дата и время добавления записи
         /// </summary>
-        public DateTime EntryTime { get; set; }
+        public DateTime EntryTime;
 
         /// <summary>
         /// Ф.И.О. сотрудника
         /// </summary>
-        public string FullName { get; set; }
+        public string FullName;
 
         /// <summary>
         /// Возраст сотрудника
         /// </summary>
-        public int Age { get; set; }
+        public int Age;
 
         /// <summary>
         /// Рост сотрудника
         /// </summary>
-        public int Growth { get; set; }
+        public int Growth;
 
         /// <summary>
         /// Дата рождения сотрудника
         /// </summary>
-        public DateTime DateBirth { get; set; }
+        public DateTime DateBirth;
 
         /// <summary>
         /// Место рождения сотрудника
         /// </summary>
-        public string PlaceBirth { get; set; }
+        public string PlaceBirth;
 
         /// <summary>
         /// Вывод данных о сотрунике
@@ -56,7 +56,7 @@ namespace Structures
         }
 
         /// <summary>
-        /// Создание сотрудника
+        /// Конструктор 
         /// </summary>
         /// <param name="Id">ID сотрудника</param>
         /// <param name="EntryTime">Дата и время добавления записи</param>
@@ -65,15 +65,45 @@ namespace Structures
         /// <param name="Growth">Рост сотрудника</param>
         /// <param name="DateBirth">Дата рождения сотрудника</param>
         /// <param name="PlaceBirth">Место рождения сотрудника</param>
-        public Employee(int Id, DateTime EntryTime, string FullName, int Age, int Growth, DateTime DateBirth, string PlaceBirth)
+        public Employee(int Id, DateTime EntryTime, string FullName, DateTime DateBirth, int Age, string PlaceBirth, int Growth)
         {
             this.Id = Id;
             this.EntryTime = EntryTime;
             this.FullName = FullName;
-            this.Age = Age;
-            this.Growth = Growth;
             this.DateBirth = DateBirth;
+            this.Age = Age;
             this.PlaceBirth = PlaceBirth;
+            this.Growth = Growth;
+        }
+
+        public Employee(int Id, string FullName, DateTime DateBirth, int Age, string PlaceBirth, int Growth) :
+            this(Id, DateTime.UtcNow, FullName, DateBirth, Age, PlaceBirth, Growth)
+        {
+
+        }
+
+        public Employee(int Id, string FullName, int Age, DateTime DateBirth, string PlaceBirth ) :
+            this(Id, DateTime.UtcNow, FullName, DateBirth, Age, PlaceBirth, 160)
+        {
+
+        }
+
+        public Employee(int Id, string FullName, int Age, DateTime DateBirth) :
+            this(Id, DateTime.UtcNow, FullName, DateBirth, Age, "", 160)
+        {
+
+        }
+
+        public Employee(int Id, string FullName, DateTime DateBirth) :
+            this(Id, DateTime.UtcNow, FullName, DateBirth, DateTime.UtcNow.Year - DateBirth.Year, "", 160)
+        {
+
+        }
+
+        public Employee(int Id, string FullName) :
+            this(Id, DateTime.UtcNow, FullName, new DateTime(2000, 1, 1), 22, "", 160)
+        {
+
         }
 
 
