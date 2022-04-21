@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Structures
+namespace Skillbox
 {
     /// <summary>
     /// Описание сотрудника
@@ -67,13 +67,16 @@ namespace Structures
         /// <param name="PlaceBirth">Место рождения сотрудника</param>
         public Employee(int Id, DateTime EntryTime, string FullName, DateTime DateBirth, int Age, string PlaceBirth, int Growth)
         {
-            this.Id = Id;
-            this.EntryTime = EntryTime;
-            this.FullName = FullName;
-            this.DateBirth = DateBirth;
-            this.Age = Age;
-            this.PlaceBirth = PlaceBirth;
-            this.Growth = Growth;
+            this.Id = Id;                       // 0
+            this.EntryTime = EntryTime;         // 1
+            this.FullName = FullName;           // 2
+            this.DateBirth = DateBirth;         // 3
+            this.Age = Age;                     // 4
+            this.PlaceBirth = PlaceBirth;       // 5
+            this.Growth = Growth;               // 6
+
+            // 4#03.04.2022 21:20#Сидоров Сидр Сидорович#12#147#01.01.2010#город Незаемо
+            // 0        1                   2             3   4      5          6
         }
 
         public Employee(int Id, string FullName, DateTime DateBirth, int Age, string PlaceBirth, int Growth) :

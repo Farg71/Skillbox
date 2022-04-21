@@ -2,7 +2,7 @@
 
 namespace Skillbox
 {
-    class Files
+    public class Files
     {
         static void Main(string[] args)
         {
@@ -84,7 +84,7 @@ namespace Skillbox
 
         }
 
-        private static void AddNewEmployees(string filePath, int lastRecord)
+        public static void AddNewEmployees(string filePath, int lastRecord)
         {
             Console.WriteLine("Сколько хотите добавить сотрудников?");
 

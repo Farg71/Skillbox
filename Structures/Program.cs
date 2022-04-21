@@ -1,127 +1,269 @@
 ﻿using System;
 
-namespace Structures
+namespace Skillbox
 {
-    class Program
+    class Structures
     {
+        public const string FilePath = @"E:\VS Projects\Skillbox\Files\Staff.txt";
+
+        public static List<Employee> Employees = new List<Employee>();
+
         static void Main(string[] args)
         {
+            bool isCatalogExists = File.Exists(FilePath);
 
-            /*
-            Научиться:
-
-            применять модификаторы доступа;
-            создавать собственные типы данных.
-
-
-            Что нужно сделать
-            Улучшите программу, которую разработали в модуле 6 (Files). Создайте структуру «Сотрудник» со следующими полями:
-
-            ID
-            Дата и время добавления записи
-            Ф.И.О.
-            Возраст
-            Рост
-            Дата рождения
-            Место рождения
-
-
-            Для записей реализуйте следующие функции:
-
-            Просмотр записи. Функция должна содержать параметр ID записи, которую необходимо вывести на экран. 
-            Создание записи.
-            Удаление записи.
-            Редактирование записи.
-            Загрузка записей в выбранном диапазоне дат.
-            Сортировка по возрастанию и убыванию даты.
-
-
-            После всех изменений записей создайте метод перезаписи изменённых данных в файл в таком виде:
-
-            1#20.12.2021 00:12#Иванов Иван Иванович#25#176#05.05.1992#город Москва
-
-            2#15.12.2021 03:12#Алексеев Алексей Иванович#24#176#05.11.1980#город Томск
-
-            …
-
-
-
-            Советы и рекомендации
-            Обратите внимание, что в строке есть символ # — разделитель. Символа # не должно быть при чтении (разбить строку на массив поможет разделение строк с помощью метода String.Split).
-            Создайте методы для работы с записями.
-            Файл может быть с данными изначально. Для примера скопируйте данные, продемонстрированные выше.
-
-
-            Что оценивается
-            Создан ежедневник, в котором могут храниться записи.
-            Одно из полей записи ― дата создания.
-            Все записи сохраняются на диске.
-            Все записи загружаются с диска.
-            С диска загружаются записи в выбранном диапазоне дат.
-            Записи можно создавать, редактировать и удалять.
-            Записи сортируются по выбранному полю.
-            */
-
-
-
-            /// Разработать ежедневник.
-            /// В ежедневнике реализовать возможность 
-            /// - создания
-            /// - удаления
-            /// - реактирования 
-            /// записей
-            /// 
-            /// В отдельной записи должно быть не менее пяти полей
-            /// 
-            /// Реализовать возможность 
-            /// - Загрузки даннах из файла
-            /// - Выгрузки даннах в файл
-            /// - Добавления данных в текущий ежедневник из выбранного файла
-            /// - Импорт записей по выбранному диапазону дат
-            /// - Упорядочивания записей ежедневника по выбранному полю
-
-            string? taskNumber = "1";
-
-            string filePath = @"..\..\..\Staff.txt";
-            bool isCatalogExists = File.Exists(filePath);
-            int lastRecord = 1;
-
+            string taskNumber = "";
 
             Console.WriteLine("\t\tСправочник «Сотрудники»\n");
 
-            while (taskNumber == "1" || taskNumber == "2")
+            if(isCatalogExists) ReadingDataFromFile();
+
+
+            //CreateEntry();
+
+            //DeletingEntry(id);
+            //DeletingEntry(fullName);
+
+            //EditingEntry(id);
+            //EditingEntry(fullName);
+
+            //DateTime startDate = new DateTime(2000, 1, 1);
+            //DateTime finishDate = DateTime.UtcNow;
+
+            //LoadRecordsInDateRange(startDate, finishDate);
+
+            //SorttingAscending();
+            //SorttingDescending();
+
+            //ReadingDataFromFile();
+
+
+            while (taskNumber != " ")
             {
-
-                Console.Clear();
-                Console.Write("Выберите режим работы (1 -вывести данные на экран, 2 - заполнить данные и добавить в справочник, " +
-                    "другие - завершение работы):\n");
-
-                taskNumber = Console.ReadLine();
-                Console.WriteLine("\n\n");
+                taskNumber = SelectMode();
 
                 switch (taskNumber)
                 {
                     case "1":
                         {
+                            Console.WriteLine("Введите номер записи:");
+
+                            int id = Convert.ToInt32(Console.ReadLine());
+
+                            if(id <= Employees.Count)
+                            {
+                                ViewingRecord(id);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Нет такой записи!");
+                            }
+
+                            break;
                         }
-                        break;
 
                     case "2":
                         {
+                            //"2 - Создание записи\n" +
+
+                            Files.AddNewEmployees(FilePath, Employees.Count);
+
+                            break;
                         }
-                        break;
+
+                    case "3":
+                        {
+                            //                 "3 - Удаление записи\n" +
+
+                            break;
+                        }
+
+                    case "4":
+                        {
+                            //"4 - Редактирование записи\n" +
+
+                            break;
+                        }
+
+                    case "5":
+                        {
+                            //"5 - Загрузка записей в выбранном диапазоне дат\n" +
+
+                            break;
+                        }
+
+                    case "6":
+                        {
+                            //"6 - Сортировка по возрастанию даты\n" +
+
+                            break;
+                        }
+
+                    case "7":
+                        {
+                            //"7 - Сортировка по убыванию даты\n" +
+
+                            break;
+                        }
+
+                    case "8":
+                        {
+                            //"8 - Сохранение данных в файл\n" +
+
+                            break;
+                        }
+
 
                     default:
 
                         Console.WriteLine("Удачного дня!");
 
-                        break;
+                        //break;
+                        return;     // Выход из цикла
                 }
-
-                
 
                 Console.ReadLine();
             }
+        }
+
+        private static string SelectMode()
+        {
+            Console.Clear();
+            Console.Write("\t\tВыберите режим работы:\n\n" +
+                "1 - Просмотр записи\n" +
+                "2 - Создание записи\n" +
+                "3 - Удаление записи\n" +
+                "4 - Редактирование записи\n" +
+                "5 - Загрузка записей в выбранном диапазоне дат\n" +
+                "6 - Сортировка по возрастанию даты\n" +
+                "7 - Сортировка по убыванию даты\n" +
+                "8 - Сохранение данных в файл\n" +
+                "другие - завершение работы:\n\n");
+
+            string taskNumber = Console.ReadLine();
+           
+            return taskNumber;
+        }
+
+        /// <summary>
+        /// Чтение данных из файла в список Employees
+        /// </summary>
+        private static void ReadingDataFromFile()
+        {
+            Employees.Clear();
+
+            string[] records = File.ReadAllLines(FilePath);
+
+            foreach (string employee in records)
+            {
+                //Employee empl = new Employee();
+
+                string[] record = employee.Split('#');
+
+                Employee empl = new Employee(Convert.ToInt32(record[0]), Convert.ToDateTime(record[1]),
+                    record[2], Convert.ToDateTime(record[5]), Convert.ToInt32(record[3]), record[6], Convert.ToInt32(record[4]));
+
+                Employees.Add(empl);
+            }
+        }
+
+
+
+
+        /// <summary>
+        /// Загрузка записей в выбранном диапазоне дат.
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="finishDate"></param>
+        private static void LoadRecordsInDateRange(DateTime startDate, DateTime finishDate)
+        {
+            //  С диска загружаются записи в выбранном диапазоне дат.
+
+        }
+
+        /// <summary>
+        /// Сортировка записей по убываниюю
+        /// </summary>
+        private static void SorttingDescending()
+        {
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Сортировка записей по возрастаниюю
+        /// </summary>
+        private static void SorttingAscending()
+        {
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Редактирование записи.
+        /// </summary>
+        /// <param name="fullName">Поное имя работника</param>
+        private static void EditingEntry(string fullName)
+        {
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Редактирование записи.
+        /// </summary>
+        /// <param name="id">Номер записи</param>
+        private static void EditingEntry(int id)
+        {
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Удаление записи.
+        /// </summary>
+        /// <param name="fullName">Поное имя работника</param>
+        private static void DeletingEntry(string fullName)
+        {
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Удаление записи.
+        /// </summary>
+        /// <param name="id">Номер записи</param>
+        private static void DeletingEntry(int id)
+        {
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Создание записи.
+        /// </summary>
+        private static void CreateEntry()
+        {
+
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Просмотр записи
+        /// </summary>
+        /// <param name="id">Номер записи</param>
+        private static void ViewingRecord(int id)
+        {
+            Print(Employees[id - 1]);
+        }
+
+        /// <summary>
+        /// Печать одного сотрудника
+        /// </summary>
+        /// <param name="emp">Экземпляр класса "Сотрудник"</param>
+        private static void Print(Employee emp)
+        {
+            Console.WriteLine($"Порядковый номер сотрудника: {emp.Id}\n" +
+                           $"Время добавления записи: {emp.EntryTime}\n" +
+                           $"Ф.И.О. сотрудника: {emp.FullName}\n" +
+                           $"Дата рождения сотрудника: {emp.DateBirth}\n" +
+                           $"Возраст сотрудника: {emp.Age}\n" +
+                           $"Место рождения сотрудника: {emp.PlaceBirth}\n" +
+                           $"Рост сотрудника: {emp.Growth}\n\n");
         }
     }
 }
