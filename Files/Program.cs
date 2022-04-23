@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Skillbox
 {
@@ -92,29 +93,72 @@ namespace Skillbox
 
             for(int i = 0; i < employeesNumber; i++)
             {
-                string entryTime = DateTime.Now.ToString("g") + "#";
+                AddNewEmployee(filePath, lastRecord + i);
 
-                Console.WriteLine("\nВведите Ф.И.О. сотрудника");
-                string fullName = Console.ReadLine() + "#";
 
-                Console.WriteLine("\nВведите возраст сотрудника");
-                string age = Console.ReadLine() + "#";
+                //int newRecord = lastRecord + 1 + i;
 
-                Console.WriteLine("\nВведите рост сотрудника");
-                string growth = Console.ReadLine() + "#";
+                //string entryTime = DateTime.Now.ToString("g");
 
-                Console.WriteLine("\nВведите дату рождения сотрудника");
-                string dateBirth = Console.ReadLine() + "#";
+                //Console.WriteLine("\nВведите Ф.И.О. сотрудника");
+                //string fullName = Console.ReadLine();
 
-                Console.WriteLine("\nВведите место рождения сотрудника");
-                string placeBirth = Console.ReadLine() + "\n";
+                ////Console.WriteLine("\nВведите возраст сотрудника");
+                ////string age = Console.ReadLine();
 
-                int newRecord = lastRecord + 1 + i;
+                //Console.WriteLine("\nВведите рост сотрудника");
+                //string growth = Console.ReadLine();
 
-                string txt = newRecord.ToString() + "#" + entryTime + fullName + age + growth + dateBirth + placeBirth;
+                //Console.WriteLine("\nВведите дату рождения сотрудника");
 
-                File.AppendAllText(filePath, txt);
+                //string dateBirth = Console.ReadLine();
+
+                //DateTime dBirth = Convert.ToDateTime(dateBirth);
+
+                //string age =  Convert.ToInt32( DateTime.Now.Subtract(dBirth).TotalDays/365.25).ToString();
+
+                //Console.WriteLine("\nВведите место рождения сотрудника");
+                //string placeBirth = Console.ReadLine() + "\n";
+
+
+                //string txt = newRecord.ToString() + "#" + entryTime + "#" + fullName + "#" + age + "#" + growth + "#" + dateBirth + "#" + placeBirth;
+                //Console.WriteLine(txt);
+
+                //File.AppendAllText(filePath, txt);
             }
+        }
+
+        private static void AddNewEmployee(string filePath, int recordNumber)
+        {
+            string entryTime = DateTime.Now.ToString("g");
+
+            Console.WriteLine("\nВведите Ф.И.О. сотрудника");
+            string fullName = Console.ReadLine();
+
+            //Console.WriteLine("\nВведите возраст сотрудника");
+            //string age = Console.ReadLine();
+
+            Console.WriteLine("\nВведите рост сотрудника");
+            string growth = Console.ReadLine();
+
+            Console.WriteLine("\nВведите дату рождения сотрудника");
+
+            string dateBirth = Console.ReadLine();
+
+            DateTime dBirth = Convert.ToDateTime(dateBirth);
+
+            string age = Convert.ToInt32(DateTime.Now.Subtract(dBirth).TotalDays / 365.25).ToString();
+
+            Console.WriteLine("\nВведите место рождения сотрудника");
+            string placeBirth = Console.ReadLine() + "\n";
+
+            int newRecord = recordNumber + 1;
+
+            string txt = newRecord.ToString() + "#" + entryTime + "#" + fullName + "#" + age + "#" + growth + "#" + dateBirth + "#" + placeBirth;
+            Console.WriteLine(txt);
+
+            File.AppendAllText(filePath, txt);
+
         }
     }
 }

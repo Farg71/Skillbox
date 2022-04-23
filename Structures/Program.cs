@@ -4,7 +4,9 @@ namespace Skillbox
 {
     class Structures
     {
-        public const string FilePath = @"E:\VS Projects\Skillbox\Files\Staff.txt";
+        //public const string FilePath = @"E:\VS Projects\Skillbox\Files\Staff.txt";
+        public const string FilePath = @"..\..\..\Staff.txt";
+
 
         public static List<Employee> Employees = new List<Employee>();
 
@@ -14,9 +16,15 @@ namespace Skillbox
 
             string taskNumber = "";
 
+            int recordNumber = 1;
+
             Console.WriteLine("\t\tСправочник «Сотрудники»\n");
 
-            if(isCatalogExists) ReadingDataFromFile();
+            if (isCatalogExists)
+            {
+                ReadingDataFromFile();
+                recordNumber = Employees.Count;
+            }
 
 
             //CreateEntry();
