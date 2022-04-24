@@ -49,10 +49,27 @@ namespace Skillbox
         /// <summary>
         /// Вывод данных о сотрунике
         /// </summary>
-        public string Print()
+        public string Txt()
         {
             return $"ID сотрудника: {Id} Дата и время добавления записи: {EntryTime} Ф.И.О.: {FullName} Возраст: {Age} " +
                 $"Рост: {Growth} Дата рождения: {DateBirth.ToShortDateString()} Место рождения: {PlaceBirth}";
+        }
+
+        public string ToString()
+        {
+            return Id.ToString() + "#" + EntryTime.ToString("g") + "#" + FullName + "#" + Age.ToString() + "#" + Growth.ToString() + "#" +
+                DateBirth.ToString("d") + "#" + PlaceBirth;
+        }
+
+        public void Print()
+        {
+            Console.WriteLine($"Порядковый номер сотрудника: {Id}\n" +
+               $"Время добавления записи: {EntryTime}\n" +
+               $"Ф.И.О. сотрудника: {FullName}\n" +
+               $"Дата рождения сотрудника: {DateBirth}\n" +
+               $"Возраст сотрудника: {Age}\n" +
+               $"Место рождения сотрудника: {PlaceBirth}\n" +
+               $"Рост сотрудника: {Growth}\n\n");
         }
 
         /// <summary>
@@ -109,6 +126,18 @@ namespace Skillbox
 
         }
 
+        public Employee(string str)
+        {
+            string[] record = str.Split('#', StringSplitOptions.RemoveEmptyEntries);
+
+            Id = Convert.ToInt32(record[0]);
+            EntryTime = Convert.ToDateTime(record[1]);
+            FullName = record[2];
+            DateBirth = Convert.ToDateTime(record[5]);
+            Age = Convert.ToInt32(record[3]);
+            PlaceBirth = record[6];
+            Growth = Convert.ToInt32(record[4]);
+        }
 
     }
 }

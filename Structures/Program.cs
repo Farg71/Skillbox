@@ -1,12 +1,12 @@
 ﻿using System;
 
+using static System.Net.Mime.MediaTypeNames;
+
 namespace Skillbox
 {
     class Structures
     {
-        //public const string FilePath = @"E:\VS Projects\Skillbox\Files\Staff.txt";
         public const string FilePath = @"..\..\..\Staff.txt";
-
 
         public static List<Employee> Employees = new List<Employee>();
 
@@ -27,14 +27,6 @@ namespace Skillbox
             }
 
 
-            //CreateEntry();
-
-            //DeletingEntry(id);
-            //DeletingEntry(fullName);
-
-            //EditingEntry(id);
-            //EditingEntry(fullName);
-
             //DateTime startDate = new DateTime(2000, 1, 1);
             //DateTime finishDate = DateTime.UtcNow;
 
@@ -43,8 +35,6 @@ namespace Skillbox
             //SorttingAscending();
             //SorttingDescending();
 
-            //ReadingDataFromFile();
-
 
             while (taskNumber != " ")
             {
@@ -52,6 +42,7 @@ namespace Skillbox
 
                 switch (taskNumber)
                 {
+                    // 1 - Просмотр записи
                     case "1":
                         {
                             Console.WriteLine("Введите номер записи:");
@@ -60,67 +51,144 @@ namespace Skillbox
 
                             if(id <= Employees.Count)
                             {
-                                ViewingRecord(id);
+                                Employee employee = Employees[id -1];
+
+                                employee.Print();
                             }
                             else
                             {
                                 Console.WriteLine("Нет такой записи!");
                             }
 
+                            Console.ReadLine();
+
                             break;
                         }
 
+                    // 2 - Создание записи
                     case "2":
                         {
-                            //"2 - Создание записи\n" +
+                            string st = Files.AddNewEmployee(Employees.Count);
 
-                            Files.AddNewEmployees(FilePath, Employees.Count);
+                            Employee empl = new Employee(st);
+
+                            Employees.Add(empl);
+
+                            File.AppendAllText(FilePath, st);
 
                             break;
                         }
 
+                    // 3 - Удаление записи
                     case "3":
                         {
-                            //                 "3 - Удаление записи\n" +
+                            Console.WriteLine("Введите номер записи, которую надо удалить:");
+
+                            int id = Convert.ToInt32(Console.ReadLine());
+
+                            Employees.RemoveAt(id - 1);
+
+                            ConsecutiveNumbering();
+
+                            string[] lines = ListToArray(Employees.Count);
+
+                            File.WriteAllLines(FilePath, lines);
 
                             break;
                         }
 
+                    // 4 - Редактирование записи
                     case "4":
                         {
-                            //"4 - Редактирование записи\n" +
+                            Console.WriteLine("Введите номер записи, которую надо отредактировать:");
+
+                            int id = Convert.ToInt32(Console.ReadLine());
+
+                            Employees.RemoveAt(id - 1);
+
+                            string st = Files.AddNewEmployee(Employees.Count);
+
+                            Employee empl = new Employee(st);
+
+                            Employees.Add(empl);
+
+                            ConsecutiveNumbering();
+
+                            string[] lines = ListToArray(Employees.Count);
+
+                            File.WriteAllLines(FilePath, lines);
+
+                            //File.AppendAllText(FilePath, st);
+
+
+                            //EditingEntry(id);
+
+                            //string[] lines = ListToArray(Employees.Count);
+
+                            //File.WriteAllLines(FilePath, lines);
 
                             break;
                         }
 
+                    // 5 - Загрузка записей в выбранном диапазоне дат
                     case "5":
                         {
-                            //"5 - Загрузка записей в выбранном диапазоне дат\n" +
+                            Console.WriteLine("Введите начальную дату:");
+                            DateTime startDate = Convert.ToDateTime(Console.ReadLine());
 
+                            Console.WriteLine("Введите конечную дату:");
+                            DateTime finishDate = Convert.ToDateTime(Console.ReadLine());
+
+                            LoadRecordsInDateRange(startDate, finishDate);
+
+                            Console.WriteLine();
+
+                            foreach(var emp in Employees)
+                            {
+                                Console.WriteLine(emp.DateBirth);
+                            }
+
+                            Console.ReadLine();
                             break;
                         }
 
+                    // 6 - Сортировка по возрастанию даты
                     case "6":
                         {
-                            //"6 - Сортировка по возрастанию даты\n" +
+                            SorttingAscending();
 
                             break;
                         }
 
+                    // 7 - Сортировка по убыванию даты
                     case "7":
                         {
-                            //"7 - Сортировка по убыванию даты\n" +
+                            DateTime d1 = new DateTime(2010, 02, 15);
+                            DateTime d2 = new DateTime(2010, 02, 16);
 
+
+                            if (d1 < d2)
+                            {
+                                Console.WriteLine(d1);
+                            }
+                            else
+                            {
+                                Console.WriteLine(d2);
+                            }
+
+                            Console.ReadLine();
                             break;
                         }
 
+                    //"8 - Сохранение данных в файл\n" +
                     case "8":
                         {
-                            //"8 - Сохранение данных в файл\n" +
+                            string[] lines = ListToArray(Employees.Count);
+
+                            File.WriteAllLines(FilePath, lines);
 
                             break;
                         }
-
 
                     default:
 
@@ -129,9 +197,26 @@ namespace Skillbox
                         //break;
                         return;     // Выход из цикла
                 }
-
-                Console.ReadLine();
             }
+        }
+
+        /// <summary>
+        /// Список сотрудников в массив строк
+        /// </summary>
+        /// <param name="numberRecords">колличество сотрудников</param>
+        /// <returns>массив строк</returns>
+        private static string[] ListToArray(int numberRecords)
+        {
+            string[] lines = new string[numberRecords];
+
+            for(int i = 0; i < numberRecords; i++)
+            {
+                Employee emp = Employees[i];
+
+                lines[i] = emp.ToString();
+            }
+
+            return lines;
         }
 
         private static string SelectMode()
@@ -164,29 +249,41 @@ namespace Skillbox
 
             foreach (string employee in records)
             {
-                //Employee empl = new Employee();
+                if (employee != "")
+                {
+                    Employee empl = new Employee(employee);
 
-                string[] record = employee.Split('#');
-
-                Employee empl = new Employee(Convert.ToInt32(record[0]), Convert.ToDateTime(record[1]),
-                    record[2], Convert.ToDateTime(record[5]), Convert.ToInt32(record[3]), record[6], Convert.ToInt32(record[4]));
-
-                Employees.Add(empl);
+                    Employees.Add(empl);
+                }
             }
         }
-
-
-
 
         /// <summary>
         /// Загрузка записей в выбранном диапазоне дат.
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="finishDate"></param>
-        private static void LoadRecordsInDateRange(DateTime startDate, DateTime finishDate)
+        private static async void LoadRecordsInDateRange(DateTime startDate, DateTime finishDate)
         {
-            //  С диска загружаются записи в выбранном диапазоне дат.
+            Employees.Clear();
 
+            using(StreamReader reader = new StreamReader(FilePath))
+            {
+                string? line;
+
+                while((line = await reader.ReadLineAsync()) != null)
+                {
+                    if (line != "")
+                    {
+                        Employee emp = new Employee(line);
+
+                        if (emp.DateBirth >= startDate && emp.DateBirth <= finishDate)
+                        {
+                            Employees.Add(emp);
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -202,76 +299,59 @@ namespace Skillbox
         /// </summary>
         private static void SorttingAscending()
         {
-            //throw new NotImplementedException();
+            Dictionary<int, Employee> employesDict = new Dictionary<int, Employee>();
+
+            for (int i = 0; i < Employees.Count; i++)
+            {
+                employesDict.Add(i + 1, Employees[i]);
+            }
+
+            foreach (var dic in employesDict)
+            {
+                Console.WriteLine($"{dic.Key}  -  {dic.Value.Id}  -  {dic.Value.DateBirth}");
+            }
+
+            Console.ReadLine();
+
+
+
+            for (int key = 1; key < employesDict.Count - 2; key++)
+            {
+                Employee empMin = employesDict[key];
+
+                for (int i = key; i < employesDict.Count - 1; i++)
+                {
+                    if (empMin.DateBirth > employesDict[i + 1].DateBirth)
+                    {
+                        employesDict[i] = employesDict[i + 1];
+                        employesDict[i + 1] = empMin;
+                        empMin = employesDict[i];
+                    }
+                }
+            }
+
+            foreach(var dic in employesDict)
+            {
+                Console.WriteLine($"{dic.Key}  -  {dic.Value.Id}  -  {dic.Value.DateBirth}");
+            }
+
+            Console.ReadLine();
         }
 
         /// <summary>
-        /// Редактирование записи.
+        /// Нумерация (Id) по порядку
         /// </summary>
-        /// <param name="fullName">Поное имя работника</param>
-        private static void EditingEntry(string fullName)
+        private static void ConsecutiveNumbering()
         {
-            //throw new NotImplementedException();
-        }
+            for (int i = 0; i < Employees.Count; i++)
+            {
+                Employee emp = Employees[i];
 
-        /// <summary>
-        /// Редактирование записи.
-        /// </summary>
-        /// <param name="id">Номер записи</param>
-        private static void EditingEntry(int id)
-        {
-            //throw new NotImplementedException();
-        }
+                emp.Id = i + 1;
 
-        /// <summary>
-        /// Удаление записи.
-        /// </summary>
-        /// <param name="fullName">Поное имя работника</param>
-        private static void DeletingEntry(string fullName)
-        {
-            //throw new NotImplementedException();
-        }
+                Employees[i] = emp;
+            }
 
-        /// <summary>
-        /// Удаление записи.
-        /// </summary>
-        /// <param name="id">Номер записи</param>
-        private static void DeletingEntry(int id)
-        {
-            //throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Создание записи.
-        /// </summary>
-        private static void CreateEntry()
-        {
-
-            //throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Просмотр записи
-        /// </summary>
-        /// <param name="id">Номер записи</param>
-        private static void ViewingRecord(int id)
-        {
-            Print(Employees[id - 1]);
-        }
-
-        /// <summary>
-        /// Печать одного сотрудника
-        /// </summary>
-        /// <param name="emp">Экземпляр класса "Сотрудник"</param>
-        private static void Print(Employee emp)
-        {
-            Console.WriteLine($"Порядковый номер сотрудника: {emp.Id}\n" +
-                           $"Время добавления записи: {emp.EntryTime}\n" +
-                           $"Ф.И.О. сотрудника: {emp.FullName}\n" +
-                           $"Дата рождения сотрудника: {emp.DateBirth}\n" +
-                           $"Возраст сотрудника: {emp.Age}\n" +
-                           $"Место рождения сотрудника: {emp.PlaceBirth}\n" +
-                           $"Рост сотрудника: {emp.Growth}\n\n");
         }
     }
 }
