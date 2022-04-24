@@ -299,6 +299,8 @@ namespace Skillbox
         /// </summary>
         private static void SorttingAscending()
         {
+
+
             Dictionary<int, Employee> employesDict = new Dictionary<int, Employee>();
 
             for (int i = 0; i < Employees.Count; i++)
