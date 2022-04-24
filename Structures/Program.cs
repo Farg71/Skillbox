@@ -14,31 +14,22 @@ namespace Skillbox
         {
             bool isCatalogExists = File.Exists(FilePath);
 
-            string taskNumber = "";
+            string taskNumber = "6";
 
             int recordNumber = 1;
 
-            Console.WriteLine("\t\tСправочник «Сотрудники»\n");
+            //Console.WriteLine("\t\tСправочник «Сотрудники»\n");
 
-            if (isCatalogExists)
-            {
-                ReadingDataFromFile();
-                recordNumber = Employees.Count;
-            }
-
-
-            //DateTime startDate = new DateTime(2000, 1, 1);
-            //DateTime finishDate = DateTime.UtcNow;
-
-            //LoadRecordsInDateRange(startDate, finishDate);
-
-            //SorttingAscending();
-            //SorttingDescending();
+            //if (isCatalogExists)
+            //{
+            //    ReadingDataFromFile();
+            //    recordNumber = Employees.Count;
+            //}
 
 
             while (taskNumber != " ")
             {
-                taskNumber = SelectMode();
+                //taskNumber = SelectMode();
 
                 switch (taskNumber)
                 {
@@ -299,43 +290,41 @@ namespace Skillbox
         /// </summary>
         private static void SorttingAscending()
         {
+            Repository rep = new Repository(
+                new Employee("1#20.12.2021 0:12#Иванов Иван Иванович#25#176#05.05.1992#город Москва"),
+                new Employee("2#15.12.2021 3:12#Алексеев Алексей Иванович#24#176#05.11.1980#город Томск"),
+                new Employee("3#03.04.2022 21:18#Петров Пётр Петрович#110#210#01.01.1970#город Тьмутаракань"),
+                new Employee("4#03.04.2022 21:20#Сидоров Сидр Сидорович#12#147#01.02.2010#город Незаемо"),
+                new Employee("5#03.04.2022 21:18#Петров Пётр Петрович#110#210#15.01.1999#город Тьмутаракань"),
+                new Employee("6#03.04.2022 21:20#Сидоров Сидр Сидорович#12#147#01.01.2010#город Незаемо")
+                );
 
 
-            //Dictionary<int, Employee> employesDict = new Dictionary<int, Employee>();
+            Console.WriteLine(rep.Employees[0].ToDBString());
+            Console.WriteLine();
 
-            //for (int i = 0; i < Employees.Count; i++)
-            //{
-            //    employesDict.Add(i + 1, Employees[i]);
-            //}
+            Console.WriteLine(rep[0].ToDBString());
+            Console.WriteLine();
 
-            //foreach (var dic in employesDict)
-            //{
-            //    Console.WriteLine($"{dic.Key}  -  {dic.Value.Id}  -  {dic.Value.DateBirth}");
-            //}
+            rep[0] = new Employee("1#20.12.2021 0:12#Иванов Иван Петрович#25#176#05.05.1992#город Москва");
 
-            //Console.ReadLine();
+            Console.WriteLine(rep[0].ToDBString());
+            Console.WriteLine();
 
+            Console.WriteLine(rep["0"]);
 
 
-            //for (int key = 1; key < employesDict.Count - 2; key++)
-            //{
-            //    Employee empMin = employesDict[key];
+            //Employee emp = new Employee(1, DateTime.Now, "Андреев Андрей Андреевич", new DateTime(1971, 11, 20), "Riga", 178);
 
-            //    for (int i = key; i < employesDict.Count - 1; i++)
-            //    {
-            //        if (empMin.DateBirth > employesDict[i + 1].DateBirth)
-            //        {
-            //            employesDict[i] = employesDict[i + 1];
-            //            employesDict[i + 1] = empMin;
-            //            empMin = employesDict[i];
-            //        }
-            //    }
-            //}
+            //Console.WriteLine(emp.ToDBString());
+            //Console.WriteLine();
+            //Console.WriteLine(emp.Txt());
+            //Console.WriteLine();
+            //emp.Print();
 
-            //foreach(var dic in employesDict)
-            //{
-            //    Console.WriteLine($"{dic.Key}  -  {dic.Value.Id}  -  {dic.Value.DateBirth}");
-            //}
+
+
+
 
             Console.ReadLine();
         }

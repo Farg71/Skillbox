@@ -16,37 +16,37 @@ namespace Skillbox
         /// <summary>
         /// ID сотрудника
         /// </summary>
-        public int id;
+        private int id;
 
         /// <summary>
         /// Дата и время добавления записи
         /// </summary>
-        public DateTime entryTime;
+        private DateTime entryTime;
 
         /// <summary>
         /// Ф.И.О. сотрудника
         /// </summary>
-        public string fullName;
+        private string fullName;
 
         /// <summary>
         /// Возраст сотрудника
         /// </summary>
-        public int age;
+        private int age;
 
         /// <summary>
         /// Рост сотрудника
         /// </summary>
-        public int growth;
+        private int growth;
 
         /// <summary>
         /// Дата рождения сотрудника
         /// </summary>
-        public DateTime dateBirth;
+        private DateTime dateBirth;
 
         /// <summary>
         /// Место рождения сотрудника
         /// </summary>
-        public string placeBirth;
+        private string placeBirth;
 
         #endregion
 
@@ -61,8 +61,7 @@ namespace Skillbox
                 $"Рост: {Growth} Дата рождения: {DateBirth.ToShortDateString()} Место рождения: {PlaceBirth}";
         }
 
-
-        public string ToString()
+        public string ToDBString()
         {
             return Id.ToString() + "#" + EntryTime.ToString("g") + "#" + FullName + "#" + Age.ToString() + "#" + Growth.ToString() + "#" +
                 DateBirth.ToString("d") + "#" + PlaceBirth;
@@ -90,12 +89,21 @@ namespace Skillbox
             this.fullName = FullName;           // 2
             this.dateBirth = DateBirth;         // 3
             this.age = Age;                     // 4
+            //  string age = Convert.ToInt32(DateTime.Now.Subtract(dBirth).TotalDays / 365.25).ToString();
             this.placeBirth = PlaceBirth;       // 5
             this.growth = Growth;               // 6
 
             // 4#03.04.2022 21:20#Сидоров Сидр Сидорович#12#147#01.01.2010#город Незаемо
             // 0        1                   2             3   4      5          6
         }
+
+        public Employee(int Id, DateTime EntryTime, string FullName, DateTime DateBirth, string PlaceBirth, int Growth) :
+            this(Id, DateTime.UtcNow, FullName, DateBirth, 0, PlaceBirth, Growth)
+        {
+            age = Convert.ToInt32(DateTime.Now.Subtract(DateBirth).TotalDays / 365.25);
+        }
+
+
 
         public Employee(string str)
         {
@@ -114,6 +122,48 @@ namespace Skillbox
 
         #region Свойства
 
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public DateTime EntryTime
+        {
+            get { return entryTime; }
+            set { entryTime = value; }
+        }
+
+        public string FullName
+        {
+            get { return fullName; }
+            set { fullName = value;}
+        }
+
+        public int Age
+        {
+            get { return age; }
+            set { age = value;}
+        }
+
+        public int Growth
+        {
+            get { return growth; }
+            set { growth = value;}
+        }
+
+        public DateTime DateBirth
+        {
+            get { return dateBirth; }
+            set { dateBirth = value; }
+        }
+
+        public string PlaceBirth
+        {
+            get { return placeBirth; }
+            set { placeBirth = value;}
+        }
 
 
         #endregion
