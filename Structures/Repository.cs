@@ -75,19 +75,23 @@ namespace Skillbox
             this.index++;
         }
 
+        /// <summary>
+        /// Теоретически: удаление сотрудника из БД
+        /// </summary>
+        /// <param name="indexString">индекс сотрудника</param>
         public void Delete(int indexString)
         {
             if(indexString < index) this.employees[indexString - 1] = this.employees[index];
             this.index--;
         }
 
+        /// <summary>
+        /// Загрузка списка сотрудников из файла
+        /// </summary>
         public void Load()
         {
             using (StreamReader sr = new StreamReader(this.path))
             {
-                //titles = sr.ReadLine().Split(',');
-
-
                 while (!sr.EndOfStream)
                 {
                     //string[] args = sr.ReadLine().Split('#');
@@ -98,6 +102,10 @@ namespace Skillbox
             }
         }
 
+        /// <summary>
+        /// Перезапись файла
+        /// </summary>
+        /// <param name="pathOut">Путь выходного файла</param>
         public async void Save(string pathOut)
         {
             using (StreamWriter sw = new StreamWriter(pathOut, false))
@@ -109,11 +117,21 @@ namespace Skillbox
             }
         }
 
+        /// <summary>
+        /// Редактирование данных о сотруднике
+        /// </summary>
+        /// <param name="indexString"></param>
+        /// <param name="line"></param>
         public void Edit(int indexString, string line)
         {
             this[indexString - 1] = new Employee(indexString, line);
         }
 
+        /// <summary>
+        /// Добавление записей к существующему файлу
+        /// </summary>
+        /// <param name="pathOut">Путь выходного файла</param>
+        /// <param name="line">Строка сотрудника</param>
         public async void Adding(string pathOut, string line)
         {
             using (var sw = new StreamWriter(pathOut, true))
@@ -157,6 +175,9 @@ namespace Skillbox
 
         #region Свойства
 
+        /// <summary>
+        /// Колличество сотрудников
+        /// </summary>
         public int Count { get { return this.index; } }
 
         #endregion

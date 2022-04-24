@@ -131,7 +131,6 @@ namespace Skillbox
             growth = Convert.ToInt32(record[4]);
         }
 
-
         public Employee(string str)
         {
             string[] record = str.Split('#', StringSplitOptions.RemoveEmptyEntries);

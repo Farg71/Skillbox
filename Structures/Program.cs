@@ -18,48 +18,11 @@ namespace Skillbox
 
             rep.Load();
 
-            //rep.PrintDBToConsole();
-
-            //Console.ReadLine();
-
-            //Console.WriteLine(rep.Count);
-            //for(int i = 0; i < rep.Count; i++)
-            //{
-            //    Console.WriteLine(rep[i].Id);
-            //    Console.WriteLine(rep[i].ToFileString());
-            //    rep[i].Print();
-            //}
-
-            //Console.ReadLine();
-
-            //rep.Add(new Employee(rep.Count + 1, DateTime.Now, "aaa", new DateTime(1971, 01, 01), "Riga", 210));
-
-            //rep.PrintDBToConsole();
-
-            //Console.ReadLine();
-
-            //rep.Save(@"..\..\..\StaffOut.txt");
-
-            //Console.ReadLine();
-
-
-            //rep.Adding(@"..\..\..\StaffOut.txt", rep[5].ToFileString(rep.Count + 1));
-
-
-            //bool isCatalogExists = File.Exists(FilePath);
-
-            string taskNumber = "6";
+            string taskNumber = "1";
 
             int recordNumber = 1;
 
             Console.WriteLine("\t\tСправочник «Сотрудники»\n");
-
-            //if (isCatalogExists)
-            //{
-            //    ReadingDataFromFile();
-            //    recordNumber = Employees.Count;
-            //}
-
 
             while (taskNumber != " ")
             {
@@ -115,7 +78,7 @@ namespace Skillbox
                         }
 
                     // 4 - Редактирование записи
-                    // ????? Убрать пустую строку!!!!
+                                                    // ????? Убрать пустую строку!!!!
 
                     case "4":
                         {
@@ -123,11 +86,13 @@ namespace Skillbox
 
                             int id = Convert.ToInt32(Console.ReadLine());
 
-                            string st = Files.AddNewEmployee(id);
+                            string st = Files.AddNewEmployee(id - 1);
 
-                            rep.Edit(id, st);
+                            rep.employees[id - 1] = new Employee(id, st);
 
-                            //rep.Save(@"..\..\..\StaffOut.txt");
+                            //rep.Edit(id, st);
+
+                            rep.Save(@"..\..\..\StaffOut.txt");
 
                             break;
                         }
@@ -141,14 +106,12 @@ namespace Skillbox
                             Console.WriteLine("Введите конечную дату:");
                             DateTime finishDate = Convert.ToDateTime(Console.ReadLine());
 
-
-                            //LoadRecordsInDateRange(startDate, finishDate);
-
-                            Console.WriteLine();
-
-                            foreach(var e in rep.employees)
+                            for(int i = 0; i < rep.Count; i++)
                             {
-                                Console.WriteLine(e.DateBirth);
+                                if (rep[i].DateBirth > startDate && rep[i].DateBirth < finishDate)
+                                {
+                                    Console.WriteLine(rep[i].ToDBString());
+                                }
                             }
 
                             Console.ReadLine();
@@ -158,7 +121,6 @@ namespace Skillbox
                     // 6 - Сортировка по возрастанию даты
                     case "6":
                         {
-                            //SorttingAscending();
 
                             break;
                         }
@@ -170,7 +132,7 @@ namespace Skillbox
                             break;
                         }
 
-                    //"8 - Сохранение данных в файл\n" +
+                    // 8 - Сохранение данных в файл
                     case "8":
                         {
                             rep.Save(@"..\..\..\StaffOut.txt");
@@ -178,12 +140,14 @@ namespace Skillbox
                             break;
                         }
 
+                    // Удачного дня!
                     default:
+                        {
+                            Console.WriteLine("Удачного дня!");
 
-                        Console.WriteLine("Удачного дня!");
-
-                        //break;
-                        return;     // Выход из цикла
+                            //break;
+                            return;     // Выход из цикла
+                        }
                 }
             }
         }
@@ -207,22 +171,6 @@ namespace Skillbox
             return taskNumber;
         }
 
-
-        /// <summary>
-        /// Сортировка записей по убываниюю
-        /// </summary>
-        private static void SorttingDescending()
-        {
-            //throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Сортировка записей по возрастаниюю
-        /// </summary>
-        private static void SorttingAscending()
-        {
-
-        }
 
     }
 }
