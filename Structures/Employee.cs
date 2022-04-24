@@ -11,40 +11,46 @@ namespace Skillbox
     /// </summary>
     struct Employee
     {
+        #region Поля
+
         /// <summary>
         /// ID сотрудника
         /// </summary>
-        public int Id;
+        public int id;
 
         /// <summary>
         /// Дата и время добавления записи
         /// </summary>
-        public DateTime EntryTime;
+        public DateTime entryTime;
 
         /// <summary>
         /// Ф.И.О. сотрудника
         /// </summary>
-        public string FullName;
+        public string fullName;
 
         /// <summary>
         /// Возраст сотрудника
         /// </summary>
-        public int Age;
+        public int age;
 
         /// <summary>
         /// Рост сотрудника
         /// </summary>
-        public int Growth;
+        public int growth;
 
         /// <summary>
         /// Дата рождения сотрудника
         /// </summary>
-        public DateTime DateBirth;
+        public DateTime dateBirth;
 
         /// <summary>
         /// Место рождения сотрудника
         /// </summary>
-        public string PlaceBirth;
+        public string placeBirth;
+
+        #endregion
+
+        #region Методы
 
         /// <summary>
         /// Вывод данных о сотрунике
@@ -54,6 +60,7 @@ namespace Skillbox
             return $"ID сотрудника: {Id} Дата и время добавления записи: {EntryTime} Ф.И.О.: {FullName} Возраст: {Age} " +
                 $"Рост: {Growth} Дата рождения: {DateBirth.ToShortDateString()} Место рождения: {PlaceBirth}";
         }
+
 
         public string ToString()
         {
@@ -72,72 +79,43 @@ namespace Skillbox
                $"Рост сотрудника: {Growth}\n\n");
         }
 
-        /// <summary>
-        /// Конструктор 
-        /// </summary>
-        /// <param name="Id">ID сотрудника</param>
-        /// <param name="EntryTime">Дата и время добавления записи</param>
-        /// <param name="FullName">Ф.И.О. сотрудника</param>
-        /// <param name="Age">Возраст сотрудника</param>
-        /// <param name="Growth">Рост сотрудника</param>
-        /// <param name="DateBirth">Дата рождения сотрудника</param>
-        /// <param name="PlaceBirth">Место рождения сотрудника</param>
+        #endregion
+
+        #region Конструкторы
+
         public Employee(int Id, DateTime EntryTime, string FullName, DateTime DateBirth, int Age, string PlaceBirth, int Growth)
         {
-            this.Id = Id;                       // 0
-            this.EntryTime = EntryTime;         // 1
-            this.FullName = FullName;           // 2
-            this.DateBirth = DateBirth;         // 3
-            this.Age = Age;                     // 4
-            this.PlaceBirth = PlaceBirth;       // 5
-            this.Growth = Growth;               // 6
+            this.id = Id;                       // 0
+            this.entryTime = EntryTime;         // 1
+            this.fullName = FullName;           // 2
+            this.dateBirth = DateBirth;         // 3
+            this.age = Age;                     // 4
+            this.placeBirth = PlaceBirth;       // 5
+            this.growth = Growth;               // 6
 
             // 4#03.04.2022 21:20#Сидоров Сидр Сидорович#12#147#01.01.2010#город Незаемо
             // 0        1                   2             3   4      5          6
-        }
-
-        public Employee(int Id, string FullName, DateTime DateBirth, int Age, string PlaceBirth, int Growth) :
-            this(Id, DateTime.UtcNow, FullName, DateBirth, Age, PlaceBirth, Growth)
-        {
-
-        }
-
-        public Employee(int Id, string FullName, int Age, DateTime DateBirth, string PlaceBirth ) :
-            this(Id, DateTime.UtcNow, FullName, DateBirth, Age, PlaceBirth, 160)
-        {
-
-        }
-
-        public Employee(int Id, string FullName, int Age, DateTime DateBirth) :
-            this(Id, DateTime.UtcNow, FullName, DateBirth, Age, "", 160)
-        {
-
-        }
-
-        public Employee(int Id, string FullName, DateTime DateBirth) :
-            this(Id, DateTime.UtcNow, FullName, DateBirth, DateTime.UtcNow.Year - DateBirth.Year, "", 160)
-        {
-
-        }
-
-        public Employee(int Id, string FullName) :
-            this(Id, DateTime.UtcNow, FullName, new DateTime(2000, 1, 1), 22, "", 160)
-        {
-
         }
 
         public Employee(string str)
         {
             string[] record = str.Split('#', StringSplitOptions.RemoveEmptyEntries);
 
-            Id = Convert.ToInt32(record[0]);
-            EntryTime = Convert.ToDateTime(record[1]);
-            FullName = record[2];
-            DateBirth = Convert.ToDateTime(record[5]);
-            Age = Convert.ToInt32(record[3]);
-            PlaceBirth = record[6];
-            Growth = Convert.ToInt32(record[4]);
+            id = Convert.ToInt32(record[0]);
+            entryTime = Convert.ToDateTime(record[1]);
+            fullName = record[2];
+            dateBirth = Convert.ToDateTime(record[5]);
+            age = Convert.ToInt32(record[3]);
+            placeBirth = record[6];
+            growth = Convert.ToInt32(record[4]);
         }
 
+        #endregion
+
+        #region Свойства
+
+
+
+        #endregion
     }
 }

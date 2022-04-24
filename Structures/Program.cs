@@ -301,41 +301,41 @@ namespace Skillbox
         {
 
 
-            Dictionary<int, Employee> employesDict = new Dictionary<int, Employee>();
+            //Dictionary<int, Employee> employesDict = new Dictionary<int, Employee>();
 
-            for (int i = 0; i < Employees.Count; i++)
-            {
-                employesDict.Add(i + 1, Employees[i]);
-            }
+            //for (int i = 0; i < Employees.Count; i++)
+            //{
+            //    employesDict.Add(i + 1, Employees[i]);
+            //}
 
-            foreach (var dic in employesDict)
-            {
-                Console.WriteLine($"{dic.Key}  -  {dic.Value.Id}  -  {dic.Value.DateBirth}");
-            }
+            //foreach (var dic in employesDict)
+            //{
+            //    Console.WriteLine($"{dic.Key}  -  {dic.Value.Id}  -  {dic.Value.DateBirth}");
+            //}
 
-            Console.ReadLine();
+            //Console.ReadLine();
 
 
 
-            for (int key = 1; key < employesDict.Count - 2; key++)
-            {
-                Employee empMin = employesDict[key];
+            //for (int key = 1; key < employesDict.Count - 2; key++)
+            //{
+            //    Employee empMin = employesDict[key];
 
-                for (int i = key; i < employesDict.Count - 1; i++)
-                {
-                    if (empMin.DateBirth > employesDict[i + 1].DateBirth)
-                    {
-                        employesDict[i] = employesDict[i + 1];
-                        employesDict[i + 1] = empMin;
-                        empMin = employesDict[i];
-                    }
-                }
-            }
+            //    for (int i = key; i < employesDict.Count - 1; i++)
+            //    {
+            //        if (empMin.DateBirth > employesDict[i + 1].DateBirth)
+            //        {
+            //            employesDict[i] = employesDict[i + 1];
+            //            employesDict[i + 1] = empMin;
+            //            empMin = employesDict[i];
+            //        }
+            //    }
+            //}
 
-            foreach(var dic in employesDict)
-            {
-                Console.WriteLine($"{dic.Key}  -  {dic.Value.Id}  -  {dic.Value.DateBirth}");
-            }
+            //foreach(var dic in employesDict)
+            //{
+            //    Console.WriteLine($"{dic.Key}  -  {dic.Value.Id}  -  {dic.Value.DateBirth}");
+            //}
 
             Console.ReadLine();
         }
