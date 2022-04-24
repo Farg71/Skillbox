@@ -6,19 +6,53 @@ namespace Skillbox
 {
     class Structures
     {
-        public const string FilePath = @"..\..\..\Staff.txt";
+        //public const string FilePath = @"..\..\..\Staff.txt";
 
-        public static List<Employee> Employees = new List<Employee>();
+        //public static List<Employee> Employees = new List<Employee>();
 
         static void Main(string[] args)
         {
-            bool isCatalogExists = File.Exists(FilePath);
+            string filePath = @"..\..\..\Staff.txt";
+
+            Repository rep = new Repository(filePath);
+
+            rep.Load();
+
+            //rep.PrintDBToConsole();
+
+            //Console.ReadLine();
+
+            //Console.WriteLine(rep.Count);
+            //for(int i = 0; i < rep.Count; i++)
+            //{
+            //    Console.WriteLine(rep[i].Id);
+            //    Console.WriteLine(rep[i].ToFileString());
+            //    rep[i].Print();
+            //}
+
+            //Console.ReadLine();
+
+            //rep.Add(new Employee(rep.Count + 1, DateTime.Now, "aaa", new DateTime(1971, 01, 01), "Riga", 210));
+
+            //rep.PrintDBToConsole();
+
+            //Console.ReadLine();
+
+            //rep.Save(@"..\..\..\StaffOut.txt");
+
+            //Console.ReadLine();
+
+
+            //rep.Adding(@"..\..\..\StaffOut.txt", rep[5].ToFileString(rep.Count + 1));
+
+
+            //bool isCatalogExists = File.Exists(FilePath);
 
             string taskNumber = "6";
 
             int recordNumber = 1;
 
-            //Console.WriteLine("\t\tСправочник «Сотрудники»\n");
+            Console.WriteLine("\t\tСправочник «Сотрудники»\n");
 
             //if (isCatalogExists)
             //{
@@ -29,7 +63,7 @@ namespace Skillbox
 
             while (taskNumber != " ")
             {
-                //taskNumber = SelectMode();
+                taskNumber = SelectMode();
 
                 switch (taskNumber)
                 {
@@ -40,11 +74,9 @@ namespace Skillbox
 
                             int id = Convert.ToInt32(Console.ReadLine());
 
-                            if(id <= Employees.Count)
+                            if(id <= rep.Count)
                             {
-                                Employee employee = Employees[id -1];
-
-                                employee.Print();
+                                Console.WriteLine(rep[id - 1].ToDBString());
                             }
                             else
                             {
@@ -59,64 +91,43 @@ namespace Skillbox
                     // 2 - Создание записи
                     case "2":
                         {
-                            string st = Files.AddNewEmployee(Employees.Count);
+                            string st = Files.AddNewEmployee(rep.Count);
 
                             Employee empl = new Employee(st);
 
-                            Employees.Add(empl);
-
-                            File.AppendAllText(FilePath, st);
+                            rep.Add(empl);
 
                             break;
                         }
 
                     // 3 - Удаление записи
+
+                                                            // Переделать!!!
                     case "3":
                         {
                             Console.WriteLine("Введите номер записи, которую надо удалить:");
 
                             int id = Convert.ToInt32(Console.ReadLine());
 
-                            Employees.RemoveAt(id - 1);
-
-                            ConsecutiveNumbering();
-
-                            string[] lines = ListToArray(Employees.Count);
-
-                            File.WriteAllLines(FilePath, lines);
+                            rep.Delete(id);
 
                             break;
                         }
 
                     // 4 - Редактирование записи
+                    // ????? Убрать пустую строку!!!!
+
                     case "4":
                         {
                             Console.WriteLine("Введите номер записи, которую надо отредактировать:");
 
                             int id = Convert.ToInt32(Console.ReadLine());
 
-                            Employees.RemoveAt(id - 1);
+                            string st = Files.AddNewEmployee(id);
 
-                            string st = Files.AddNewEmployee(Employees.Count);
+                            rep.Edit(id, st);
 
-                            Employee empl = new Employee(st);
-
-                            Employees.Add(empl);
-
-                            ConsecutiveNumbering();
-
-                            string[] lines = ListToArray(Employees.Count);
-
-                            File.WriteAllLines(FilePath, lines);
-
-                            //File.AppendAllText(FilePath, st);
-
-
-                            //EditingEntry(id);
-
-                            //string[] lines = ListToArray(Employees.Count);
-
-                            //File.WriteAllLines(FilePath, lines);
+                            //rep.Save(@"..\..\..\StaffOut.txt");
 
                             break;
                         }
@@ -130,13 +141,13 @@ namespace Skillbox
                             Console.WriteLine("Введите конечную дату:");
                             DateTime finishDate = Convert.ToDateTime(Console.ReadLine());
 
-                            LoadRecordsInDateRange(startDate, finishDate);
+                            //LoadRecordsInDateRange(startDate, finishDate);
 
                             Console.WriteLine();
 
-                            foreach(var emp in Employees)
+                            foreach(var e in rep.employees)
                             {
-                                Console.WriteLine(emp.DateBirth);
+                                Console.WriteLine(e.DateBirth);
                             }
 
                             Console.ReadLine();
@@ -174,9 +185,7 @@ namespace Skillbox
                     //"8 - Сохранение данных в файл\n" +
                     case "8":
                         {
-                            string[] lines = ListToArray(Employees.Count);
-
-                            File.WriteAllLines(FilePath, lines);
+                            rep.Save(@"..\..\..\StaffOut.txt");
 
                             break;
                         }
@@ -196,19 +205,19 @@ namespace Skillbox
         /// </summary>
         /// <param name="numberRecords">колличество сотрудников</param>
         /// <returns>массив строк</returns>
-        private static string[] ListToArray(int numberRecords)
-        {
-            string[] lines = new string[numberRecords];
+        //private static string[] ListToArray(int numberRecords)
+        //{
+        //    string[] lines = new string[numberRecords];
 
-            for(int i = 0; i < numberRecords; i++)
-            {
-                Employee emp = Employees[i];
+        //    for(int i = 0; i < numberRecords; i++)
+        //    {
+        //        Employee emp = Employees[i];
 
-                lines[i] = emp.ToString();
-            }
+        //        lines[i] = emp.ToString();
+        //    }
 
-            return lines;
-        }
+        //    return lines;
+        //}
 
         private static string SelectMode()
         {
@@ -229,53 +238,53 @@ namespace Skillbox
             return taskNumber;
         }
 
-        /// <summary>
-        /// Чтение данных из файла в список Employees
-        /// </summary>
-        private static void ReadingDataFromFile()
-        {
-            Employees.Clear();
+        ///// <summary>
+        ///// Чтение данных из файла в список Employees
+        ///// </summary>
+        //private static void ReadingDataFromFile()
+        //{
+        //    Employees.Clear();
 
-            string[] records = File.ReadAllLines(FilePath);
+        //    string[] records = File.ReadAllLines(FilePath);
 
-            foreach (string employee in records)
-            {
-                if (employee != "")
-                {
-                    Employee empl = new Employee(employee);
+        //    foreach (string employee in records)
+        //    {
+        //        if (employee != "")
+        //        {
+        //            Employee empl = new Employee(employee);
 
-                    Employees.Add(empl);
-                }
-            }
-        }
+        //            Employees.Add(empl);
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Загрузка записей в выбранном диапазоне дат.
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="finishDate"></param>
-        private static async void LoadRecordsInDateRange(DateTime startDate, DateTime finishDate)
-        {
-            Employees.Clear();
+        //private static async void LoadRecordsInDateRange(DateTime startDate, DateTime finishDate)
+        //{
+        //    Employees.Clear();
 
-            using(StreamReader reader = new StreamReader(FilePath))
-            {
-                string? line;
+        //    using(StreamReader reader = new StreamReader(FilePath))
+        //    {
+        //        string? line;
 
-                while((line = await reader.ReadLineAsync()) != null)
-                {
-                    if (line != "")
-                    {
-                        Employee emp = new Employee(line);
+        //        while((line = await reader.ReadLineAsync()) != null)
+        //        {
+        //            if (line != "")
+        //            {
+        //                Employee emp = new Employee(line);
 
-                        if (emp.DateBirth >= startDate && emp.DateBirth <= finishDate)
-                        {
-                            Employees.Add(emp);
-                        }
-                    }
-                }
-            }
-        }
+        //                if (emp.DateBirth >= startDate && emp.DateBirth <= finishDate)
+        //                {
+        //                    Employees.Add(emp);
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Сортировка записей по убываниюю
@@ -290,28 +299,40 @@ namespace Skillbox
         /// </summary>
         private static void SorttingAscending()
         {
-            Repository rep = new Repository(
-                new Employee("1#20.12.2021 0:12#Иванов Иван Иванович#25#176#05.05.1992#город Москва"),
-                new Employee("2#15.12.2021 3:12#Алексеев Алексей Иванович#24#176#05.11.1980#город Томск"),
-                new Employee("3#03.04.2022 21:18#Петров Пётр Петрович#110#210#01.01.1970#город Тьмутаракань"),
-                new Employee("4#03.04.2022 21:20#Сидоров Сидр Сидорович#12#147#01.02.2010#город Незаемо"),
-                new Employee("5#03.04.2022 21:18#Петров Пётр Петрович#110#210#15.01.1999#город Тьмутаракань"),
-                new Employee("6#03.04.2022 21:20#Сидоров Сидр Сидорович#12#147#01.01.2010#город Незаемо")
-                );
+            //Repository rep = new Repository(FilePath);
+
+            //foreach (var t in rep.titles)
+            //{
+            //    Console.WriteLine(t);
+            //}
+
+            //rep = new Repository(
+            //    new Employee("1#20.12.2021 0:12#Иванов Иван Иванович#25#176#05.05.1992#город Москва"),
+            //    new Employee("2#15.12.2021 3:12#Алексеев Алексей Иванович#24#176#05.11.1980#город Томск"),
+            //    new Employee("3#03.04.2022 21:18#Петров Пётр Петрович#110#210#01.01.1970#город Тьмутаракань"),
+            //    new Employee("4#03.04.2022 21:20#Сидоров Сидр Сидорович#12#147#01.02.2010#город Незаемо"),
+            //    new Employee("5#03.04.2022 21:18#Петров Пётр Петрович#110#210#15.01.1999#город Тьмутаракань"),
+            //    new Employee("6#03.04.2022 21:20#Сидоров Сидр Сидорович#12#147#01.01.2010#город Незаемо")
+            //    );
 
 
-            Console.WriteLine(rep.Employees[0].ToDBString());
-            Console.WriteLine();
+            //Console.WriteLine(rep.employees[0].ToDBString());
+            //Console.WriteLine();
 
-            Console.WriteLine(rep[0].ToDBString());
-            Console.WriteLine();
+            //Console.WriteLine(rep[0].ToDBString());
+            //Console.WriteLine();
 
-            rep[0] = new Employee("1#20.12.2021 0:12#Иванов Иван Петрович#25#176#05.05.1992#город Москва");
+            //rep[0] = new Employee("1#20.12.2021 0:12#Иванов Иван Петрович#25#176#05.05.1992#город Москва");
 
-            Console.WriteLine(rep[0].ToDBString());
-            Console.WriteLine();
+            //Console.WriteLine(rep[0].ToDBString());
+            //Console.WriteLine();
 
-            Console.WriteLine(rep["0"]);
+            //Console.WriteLine(rep["0"]);
+            //Console.WriteLine();
+
+            //rep.PrintDBToConsole();
+
+
 
 
             //Employee emp = new Employee(1, DateTime.Now, "Андреев Андрей Андреевич", new DateTime(1971, 11, 20), "Riga", 178);
@@ -332,18 +353,18 @@ namespace Skillbox
         /// <summary>
         /// Нумерация (Id) по порядку
         /// </summary>
-        private static void ConsecutiveNumbering()
-        {
-            for (int i = 0; i < Employees.Count; i++)
-            {
-                Employee emp = Employees[i];
+        //private static void ConsecutiveNumbering()
+        //{
+        //    for (int i = 0; i < Employees.Count; i++)
+        //    {
+        //        Employee emp = Employees[i];
 
-                emp.Id = i + 1;
+        //        emp.Id = i + 1;
 
-                Employees[i] = emp;
-            }
+        //        Employees[i] = emp;
+        //    }
 
-        }
+        //}
     }
 }
 

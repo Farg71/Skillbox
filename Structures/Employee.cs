@@ -63,9 +63,24 @@ namespace Skillbox
 
         public string ToDBString()
         {
+            //this.titles[0],15} {this.titles[1],20} {this.titles[2],15} {this.titles[3],15} {this.titles[4],10} " +
+            //    $"{this.titles[5],15} {this.titles[6],20}");
+            return $"{Id} {EntryTime.ToString("g")} {FullName} {Age} {Growth} {DateBirth.ToString("d")} {PlaceBirth}";
+        }
+
+
+        public string ToFileString()
+        {
             return Id.ToString() + "#" + EntryTime.ToString("g") + "#" + FullName + "#" + Age.ToString() + "#" + Growth.ToString() + "#" +
                 DateBirth.ToString("d") + "#" + PlaceBirth;
         }
+
+        public string ToFileString(int id)
+        {
+            return id.ToString() + "#" + EntryTime.ToString("g") + "#" + FullName + "#" + Age.ToString() + "#" + Growth.ToString() + "#" +
+                DateBirth.ToString("d") + "#" + PlaceBirth;
+        }
+
 
         public void Print()
         {
@@ -89,7 +104,7 @@ namespace Skillbox
             this.fullName = FullName;           // 2
             this.dateBirth = DateBirth;         // 3
             this.age = Age;                     // 4
-            //  string age = Convert.ToInt32(DateTime.Now.Subtract(dBirth).TotalDays / 365.25).ToString();
+            //  age = Convert.ToInt32(DateTime.Now.Subtract(dBirth).TotalDays / 365.25);
             this.placeBirth = PlaceBirth;       // 5
             this.growth = Growth;               // 6
 
@@ -103,6 +118,18 @@ namespace Skillbox
             age = Convert.ToInt32(DateTime.Now.Subtract(DateBirth).TotalDays / 365.25);
         }
 
+        public Employee(int Id, string str)
+        {
+            string[] record = str.Split('#', StringSplitOptions.RemoveEmptyEntries);
+
+            id = Id;
+            entryTime = Convert.ToDateTime(record[1]);
+            fullName = record[2];
+            dateBirth = Convert.ToDateTime(record[5]);
+            age = Convert.ToInt32(record[3]);
+            placeBirth = record[6];
+            growth = Convert.ToInt32(record[4]);
+        }
 
 
         public Employee(string str)

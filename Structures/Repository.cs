@@ -8,15 +8,139 @@ namespace Skillbox
 {
     internal class Repository
     {
+        #region Поля
+
         /// <summary>
         /// База данных сотрудников
         /// </summary>
-        public Employee[] Employees;
+        public Employee[] employees;
+
+        private string path;
+
+        int index;
+        public string[] titles;    // зоголовки полей сотрудника
+
+        #endregion
+
+        #region Конструкторы
+
+        public Repository(string Path)
+        {
+            this.path = Path;
+            this.index = 0;
+            this.titles = new string[7]
+            {
+                "ID сотрудника",
+                "Дата и время добавления записи",
+                "Ф.И.О.",
+                "Возраст",
+                "Рост",
+                "Дата рождения",
+                "Место рождения"
+
+            };
+            this.employees = new Employee[2];
+        }
+
+        public Repository(params Employee[] employees)
+        {
+            this.employees = employees;  // ?? throw new ArgumentNullException(nameof(employees));
+        }
+
+        #endregion
+
+        #region Методы
+
+
+        /// <summary>
+        /// метод для увеличения пространства хранения
+        /// </summary>
+        /// <param name="flag"></param>
+        private void Resize(bool flag)
+        {
+            if(flag)
+            {
+                Array.Resize(ref this.employees, this.employees.Length + 10);    // добавляет по 10 элементов (можно и умножать
+            }
+        }
+
+        /// <summary>
+        /// Добавление нового сотрудника
+        /// </summary>
+        /// <param name="newEmp"></param>
+        public void Add(Employee newEmp)
+        {
+            this.Resize(index >= this.employees.Length);
+            this.employees[index] = newEmp;
+            this.index++;
+        }
+
+        public void Delete(int indexString)
+        {
+            if(indexString < index) this.employees[indexString - 1] = this.employees[index];
+            this.index--;
+        }
+
+        public void Load()
+        {
+            using (StreamReader sr = new StreamReader(this.path))
+            {
+                //titles = sr.ReadLine().Split(',');
+
+
+                while (!sr.EndOfStream)
+                {
+                    //string[] args = sr.ReadLine().Split('#');
+                    string line = sr.ReadLine();
+
+                    Add(new Employee(line));
+                }
+            }
+        }
+
+        public async void Save(string pathOut)
+        {
+            using (StreamWriter sw = new StreamWriter(pathOut, false))
+            {
+                for(int i = 0; i < this.Count; i++)
+                {
+                    await sw.WriteLineAsync(this.employees[i].ToFileString());
+                }
+            }
+        }
+
+        public void Edit(int indexString, string line)
+        {
+            this[indexString - 1] = new Employee(indexString, line);
+        }
+
+        public async void Adding(string pathOut, string line)
+        {
+            using (var sw = new StreamWriter(pathOut, true))
+            {
+                await sw.WriteLineAsync(line);
+            }
+        }
+
+        public void PrintDBToConsole()
+        {
+            Console.WriteLine($"{this.titles[0],15} {this.titles[1],30} {this.titles[2],15} {this.titles[3],15} {this.titles[4],10} " +
+                $"{this.titles[5],15} {this.titles[6],20}");
+
+            for (int i = 0; i < index; i++)
+            {
+                Console.WriteLine(this.employees[i].ToDBString());
+            }
+        }
+
+        #endregion
+
+        #region Индексаторы
 
         public Employee this[int index]
         {
-            get { return Employees[index]; }
-            set { Employees[index] = value; }
+            get { return employees[index]; }
+            set { employees[index] = value; }
         }
 
         /// <summary>
@@ -24,18 +148,19 @@ namespace Skillbox
         /// </summary>
         /// <param name="ind">индекс массива в string</param>
         /// <returns></returns>
-        public string this[string ind]
+        public string this[string index]
         {
-            get { return this[Convert.ToInt32(ind)].ToDBString(); }
+            get { return this[Convert.ToInt32(index)].ToDBString(); }
         }
 
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        /// <param name="employees">Массив сотрудников</param>
-        public Repository(params Employee[] employees)
-        {
-            Employees = employees;  // ?? throw new ArgumentNullException(nameof(employees));
-        }
+        #endregion
+
+        #region Свойства
+
+        public int Count { get { return this.index; } }
+
+        #endregion
+
+
     }
 }
