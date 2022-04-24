@@ -1,26 +1,18 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Xml.Linq;
 
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Skillbox
 {
     class Collections
     {
-
         static void Main(string[] args)
         {
-            string filePath = @"..\..\..\Staff.txt";
-
-            Repository rep = new Repository(filePath);
-
-            rep.Load();
-
             string taskNumber = "1";
-
-            int recordNumber = 1;
-
-            Console.WriteLine("\t\tСправочник «Сотрудники»\n");
 
             while (taskNumber != " ")
             {
@@ -28,106 +20,112 @@ namespace Skillbox
 
                 switch (taskNumber)
                 {
-                    // 1 - Просмотр записи
+                    // Задание 1. Работа с List<>
                     case "1":
                         {
-                            Console.WriteLine("Введите номер записи:");
+                            List<int> intsList = ListFilling();
 
-                            int id = Convert.ToInt32(Console.ReadLine());
+                            ListScreenOutput(intsList);
 
-                            if (id <= rep.Count)
-                            {
-                                Console.WriteLine(rep[id - 1].ToDBString());
-                            }
-                            else
-                            {
-                                Console.WriteLine("Нет такой записи!");
-                            }
+                            intsList = ListDeletions(intsList);
 
-                            Console.ReadLine();
+                            ListScreenOutput(intsList);
 
                             break;
                         }
 
-                    // 2 - Создание записи
+                        // Задание 2.Телефонная книга.
+                            //Что нужно сделать
+                            
+                            //Далее программа предлагает найти владельца по введенному номеру телефона.Пользователь вводит номер телефона
+                            //и ему выдаётся ФИО владельца.Если владельца по такому номеру телефона не зарегистрировано, программа выводит
+                            //на экран соответствующее сообщение.
+
+
+                            //Совет
+                            //Для того, чтобы находить значение в Dictionary, нужно использовать TryGetValue.
+
+
+
+                            //Что оценивается
+                            //Программа разделена на логические методы.
+                            //Для хранения элементов записной книжки используется Dictionary.
+
                     case "2":
                         {
-                            string st = Files.AddNewEmployee(rep.Count);
+                            Dictionary<int, string> phoneBook = DictionaryFilling();
 
-                            Employee empl = new Employee(st);
 
-                            rep.Add(empl);
 
-                            break;
-                        }
 
-                    // 3 - Удаление записи
-                    case "3":
-                        {
-                            Console.WriteLine("Введите номер записи, которую надо удалить:");
 
-                            int id = Convert.ToInt32(Console.ReadLine());
 
-                            rep.Delete(id);
+                            Console.WriteLine("Телефонная книга:\n");
 
-                            break;
-                        }
-
-                    // 4 - Редактирование записи
-                    case "4":
-                        {
-                            Console.WriteLine("Введите номер записи, которую надо отредактировать:");
-
-                            int id = Convert.ToInt32(Console.ReadLine());
-
-                            string st = Files.AddNewEmployee(id - 1);
-
-                            rep.employees[id - 1] = new Employee(id, st);
-
-                            break;
-                        }
-
-                    // 5 - Загрузка записей в выбранном диапазоне дат
-                    case "5":
-                        {
-                            Console.WriteLine("Введите начальную дату:");
-                            DateTime startDate = Convert.ToDateTime(Console.ReadLine());
-
-                            Console.WriteLine("Введите конечную дату:");
-                            DateTime finishDate = Convert.ToDateTime(Console.ReadLine());
-
-                            for (int i = 0; i < rep.Count; i++)
+                            foreach(var e in phoneBook)
                             {
-                                if (rep[i].DateBirth > startDate && rep[i].DateBirth < finishDate)
-                                {
-                                    Console.WriteLine(rep[i].ToDBString());
-                                }
+                                Console.WriteLine($"{e.Key} - {e.Value}");
                             }
 
                             Console.ReadLine();
                             break;
                         }
 
-                    // 6 - Сортировка по возрастанию даты
-                    case "6":
+                        // Задание 3.Проверка повторов.
+                            //Что нужно сделать
+                            //Пользователь вводит число. Число сохраняется в HashSet коллекцию.Если такое число уже присутствует в коллекции, то пользователю на экран выводится сообщение, что число уже вводилось ранее. Если числа нет, то появляется сообщение о том, что число успешно сохранено. 
+
+
+
+                            //Советы и рекомендации
+                            //Для добавление числа в HashSet используйте метод Add.
+
+
+
+                            //Что оценивается
+                            //В программе в качестве коллекции используется HashSet.
+                    case "3":
                         {
-                            rep.SortDateBirthAscending();
 
                             break;
                         }
 
-                    // 7 - Сортировка по убыванию даты
-                    case "7":
-                        {
-                            rep.SortDateBirthDescending();
+                        // Задание 4.Записная книжка.
+                            //Что нужно сделать
+                            //Программа спрашивает у пользователя данные о контакте:
 
-                            break;
-                        }
+                            //ФИО
+                            //Улица
+                            //Номер дома
+                            //Номер квартиры
+                            //Мобильный телефон
+                            //Домашний телефон
 
-                    // 8 - Сохранение данных в файл
-                    case "8":
+
+                            //С помощью XElement создайте xml файл, в котором есть введенная информация. XML файл должен содержать следующую структуру:
+
+                            //< Person name =”ФИО человека” >
+                            //    < Address >
+                            //        < Street > Название улицы </ Street >
+                            //        < HouseNumber > Номер дома </ HouseNumber >
+                            //        < FlatNumber > Номер квартиры </ FlatNumber >
+                            //    </ Address >
+                            //    < Phones >
+                            //        < MobilePhone > 89999999999999 </ MobilePhone >
+                            //        < FlatPhone > 123 - 45 - 67 < FlatPhone >
+                            //    </ Phones >
+                            //</ Person >
+
+
+                            //Советы и рекомендации
+                            //Заполняйте XElement в ходе заполнения данных. Изучите возможности XElement в документации Microsoft.
+
+
+
+                            //Что оценивается
+                            //Программа создаёт Xml файл, содержащий все данные о контакте.
+                    case "4":
                         {
-                            rep.Save(@"..\..\..\StaffOut.txt");
 
                             break;
                         }
@@ -144,26 +142,109 @@ namespace Skillbox
             }
         }
 
+        /// <summary>
+        /// Ввод номера телефонов и ФИО их владельцев
+        /// </summary>
+        /// <returns>Словарь с данными</returns>
+        private static Dictionary<int, string> DictionaryFilling()
+        {
+            Dictionary<int, string> dict = new Dictionary<int, string>();
+
+            Console.Clear();
+            Console.WriteLine("\t\tТелефонная книга:\n");
+            Console.WriteLine();
+
+            while(true)
+            {
+                Console.WriteLine("\nВведите номер телефона:");
+                string telString = Console.ReadLine();
+
+                if (telString == "") break;
+
+                int telNumber = int.Parse(telString);
+
+                if (!dict.ContainsKey(telNumber))
+                {
+                    Console.WriteLine("\nВведите имя:");
+
+                    string? name = Console.ReadLine();
+
+                    dict.Add(telNumber, name);
+                }
+                else
+                {
+                    Console.WriteLine("\nТакой номер уже вводили!");
+                }
+            }
+
+            return dict;
+        }
+
+        /// <summary>
+        /// Удаление из листа числа, которые больше 25, но меньше 50.
+        /// Два варианта
+        /// </summary>
+        /// <param name="intsList"></param>
+        /// <returns></returns>
+        private static List<int> ListDeletions(List<int> intsList)
+        {
+            //intsList.RemoveAll(n => n > 25 & n < 50);
+
+            intsList.RemoveAll(DellRange);
+
+            return intsList;
+        }
+
+        private static bool DellRange(int n)
+        {
+            return n > 25 & n < 50;
+        }
+
+        /// <summary>
+        /// Вывод списка и его ёмеости на консоль
+        /// </summary>
+        /// <param name="intsList"></param>
+        private static void ListScreenOutput(List<int> intsList)
+        {
+            foreach (int i in intsList)
+            {
+                Console.WriteLine(i);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine($"Ёмеость List: {intsList.Count}");
+            Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Заполнение списка случайными величинами
+        /// </summary>
+        /// <returns></returns>
+        private static List<int> ListFilling()
+        {
+            Random random = new Random();
+            List<int> list = new List<int>();
+
+            for (int i = 0; i < 100; i++)
+            {
+                list.Add(random.Next(0, 101));
+            }
+
+            return list;
+        }
+
         private static string SelectMode()
         {
             Console.Clear();
             Console.Write("\t\tВыберите режим работы:\n\n" +
-                "1 - Просмотр записи\n" +
-                "2 - Создание записи\n" +
-                "3 - Удаление записи\n" +
-                "4 - Редактирование записи\n" +
-                "5 - Загрузка записей в выбранном диапазоне дат\n" +
-                "6 - Сортировка по возрастанию даты\n" +
-                "7 - Сортировка по убыванию даты\n" +
-                "8 - Сохранение данных в файл\n" +
+                "1 - Работа с листом\n" +
+                "2 - Телефонная книга\n" +
+                "3 - Проверка повторов\n" +
+                "4 - Записная книжка\n" +
                 "другие - завершение работы:\n\n");
 
-            string taskNumber = Console.ReadLine();
-
-            return taskNumber;
+            return Console.ReadLine();
         }
-
-
     }
 }
 

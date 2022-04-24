@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Structures.Program">
-    <Position X="1.5" Y="2.75" Width="1.5" />
+  <Class Name="Skillbox.Repository">
+    <Position X="4.5" Y="1.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
-      <FileName>Program.cs</FileName>
+      <HashCode>AAIAiIIAQAAAAAAACAAKAQQAAAEAACACAAAAAAEBAAA=</HashCode>
+      <FileName>Repository.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Struct Name="Structures.Employee">
-    <Position X="3.75" Y="2.75" Width="1.5" />
+  <Struct Name="Skillbox.Employee">
+    <Position X="1" Y="1.25" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAQAQAIAAAEAAAAAgAAAABAAAAAAAAAAEAAA=</HashCode>
+      <HashCode>AAACAAQAAQAQQIEAEECAAAAgAAAAJAQAAARAAAAEAgA=</HashCode>
       <FileName>Employee.cs</FileName>
     </TypeIdentifier>
   </Struct>
