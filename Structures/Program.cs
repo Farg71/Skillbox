@@ -141,6 +141,7 @@ namespace Skillbox
                             Console.WriteLine("Введите конечную дату:");
                             DateTime finishDate = Convert.ToDateTime(Console.ReadLine());
 
+
                             //LoadRecordsInDateRange(startDate, finishDate);
 
                             Console.WriteLine();
@@ -157,7 +158,7 @@ namespace Skillbox
                     // 6 - Сортировка по возрастанию даты
                     case "6":
                         {
-                            SorttingAscending();
+                            //SorttingAscending();
 
                             break;
                         }
@@ -165,20 +166,7 @@ namespace Skillbox
                     // 7 - Сортировка по убыванию даты
                     case "7":
                         {
-                            DateTime d1 = new DateTime(2010, 02, 15);
-                            DateTime d2 = new DateTime(2010, 02, 16);
 
-
-                            if (d1 < d2)
-                            {
-                                Console.WriteLine(d1);
-                            }
-                            else
-                            {
-                                Console.WriteLine(d2);
-                            }
-
-                            Console.ReadLine();
                             break;
                         }
 
@@ -200,25 +188,6 @@ namespace Skillbox
             }
         }
 
-        /// <summary>
-        /// Список сотрудников в массив строк
-        /// </summary>
-        /// <param name="numberRecords">колличество сотрудников</param>
-        /// <returns>массив строк</returns>
-        //private static string[] ListToArray(int numberRecords)
-        //{
-        //    string[] lines = new string[numberRecords];
-
-        //    for(int i = 0; i < numberRecords; i++)
-        //    {
-        //        Employee emp = Employees[i];
-
-        //        lines[i] = emp.ToString();
-        //    }
-
-        //    return lines;
-        //}
-
         private static string SelectMode()
         {
             Console.Clear();
@@ -238,53 +207,6 @@ namespace Skillbox
             return taskNumber;
         }
 
-        ///// <summary>
-        ///// Чтение данных из файла в список Employees
-        ///// </summary>
-        //private static void ReadingDataFromFile()
-        //{
-        //    Employees.Clear();
-
-        //    string[] records = File.ReadAllLines(FilePath);
-
-        //    foreach (string employee in records)
-        //    {
-        //        if (employee != "")
-        //        {
-        //            Employee empl = new Employee(employee);
-
-        //            Employees.Add(empl);
-        //        }
-        //    }
-        //}
-
-        /// <summary>
-        /// Загрузка записей в выбранном диапазоне дат.
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="finishDate"></param>
-        //private static async void LoadRecordsInDateRange(DateTime startDate, DateTime finishDate)
-        //{
-        //    Employees.Clear();
-
-        //    using(StreamReader reader = new StreamReader(FilePath))
-        //    {
-        //        string? line;
-
-        //        while((line = await reader.ReadLineAsync()) != null)
-        //        {
-        //            if (line != "")
-        //            {
-        //                Employee emp = new Employee(line);
-
-        //                if (emp.DateBirth >= startDate && emp.DateBirth <= finishDate)
-        //                {
-        //                    Employees.Add(emp);
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
 
         /// <summary>
         /// Сортировка записей по убываниюю
@@ -299,72 +221,9 @@ namespace Skillbox
         /// </summary>
         private static void SorttingAscending()
         {
-            //Repository rep = new Repository(FilePath);
 
-            //foreach (var t in rep.titles)
-            //{
-            //    Console.WriteLine(t);
-            //}
-
-            //rep = new Repository(
-            //    new Employee("1#20.12.2021 0:12#Иванов Иван Иванович#25#176#05.05.1992#город Москва"),
-            //    new Employee("2#15.12.2021 3:12#Алексеев Алексей Иванович#24#176#05.11.1980#город Томск"),
-            //    new Employee("3#03.04.2022 21:18#Петров Пётр Петрович#110#210#01.01.1970#город Тьмутаракань"),
-            //    new Employee("4#03.04.2022 21:20#Сидоров Сидр Сидорович#12#147#01.02.2010#город Незаемо"),
-            //    new Employee("5#03.04.2022 21:18#Петров Пётр Петрович#110#210#15.01.1999#город Тьмутаракань"),
-            //    new Employee("6#03.04.2022 21:20#Сидоров Сидр Сидорович#12#147#01.01.2010#город Незаемо")
-            //    );
-
-
-            //Console.WriteLine(rep.employees[0].ToDBString());
-            //Console.WriteLine();
-
-            //Console.WriteLine(rep[0].ToDBString());
-            //Console.WriteLine();
-
-            //rep[0] = new Employee("1#20.12.2021 0:12#Иванов Иван Петрович#25#176#05.05.1992#город Москва");
-
-            //Console.WriteLine(rep[0].ToDBString());
-            //Console.WriteLine();
-
-            //Console.WriteLine(rep["0"]);
-            //Console.WriteLine();
-
-            //rep.PrintDBToConsole();
-
-
-
-
-            //Employee emp = new Employee(1, DateTime.Now, "Андреев Андрей Андреевич", new DateTime(1971, 11, 20), "Riga", 178);
-
-            //Console.WriteLine(emp.ToDBString());
-            //Console.WriteLine();
-            //Console.WriteLine(emp.Txt());
-            //Console.WriteLine();
-            //emp.Print();
-
-
-
-
-
-            Console.ReadLine();
         }
 
-        /// <summary>
-        /// Нумерация (Id) по порядку
-        /// </summary>
-        //private static void ConsecutiveNumbering()
-        //{
-        //    for (int i = 0; i < Employees.Count; i++)
-        //    {
-        //        Employee emp = Employees[i];
-
-        //        emp.Id = i + 1;
-
-        //        Employees[i] = emp;
-        //    }
-
-        //}
     }
 }
 
