@@ -5,8 +5,9 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Skillbox
 {
-    class Structures
+    class Collections
     {
+
         static void Main(string[] args)
         {
             string filePath = @"..\..\..\Staff.txt";
@@ -16,6 +17,8 @@ namespace Skillbox
             rep.Load();
 
             string taskNumber = "1";
+
+            int recordNumber = 1;
 
             Console.WriteLine("\t\tСправочник «Сотрудники»\n");
 
@@ -32,7 +35,7 @@ namespace Skillbox
 
                             int id = Convert.ToInt32(Console.ReadLine());
 
-                            if(id <= rep.Count)
+                            if (id <= rep.Count)
                             {
                                 Console.WriteLine(rep[id - 1].ToDBString());
                             }
@@ -93,7 +96,7 @@ namespace Skillbox
                             Console.WriteLine("Введите конечную дату:");
                             DateTime finishDate = Convert.ToDateTime(Console.ReadLine());
 
-                            for(int i = 0; i < rep.Count; i++)
+                            for (int i = 0; i < rep.Count; i++)
                             {
                                 if (rep[i].DateBirth > startDate && rep[i].DateBirth < finishDate)
                                 {
@@ -155,8 +158,11 @@ namespace Skillbox
                 "8 - Сохранение данных в файл\n" +
                 "другие - завершение работы:\n\n");
 
-            return Console.ReadLine();
+            string taskNumber = Console.ReadLine();
+
+            return taskNumber;
         }
+
 
     }
 }
