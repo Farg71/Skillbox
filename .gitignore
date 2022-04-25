@@ -13,6 +13,8 @@ Methods/bin/
 Methods/obj/
 Structures/bin/
 Structures/obj/
+Collections/bin/
+Collections/obj/
 .vs/
 *.log
 *.suo
