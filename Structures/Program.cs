@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using static System.Net.Mime.MediaTypeNames;
 
@@ -64,8 +65,6 @@ namespace Skillbox
                         }
 
                     // 3 - Удаление записи
-
-                                                            // Переделать!!!
                     case "3":
                         {
                             Console.WriteLine("Введите номер записи, которую надо удалить:");
@@ -78,8 +77,6 @@ namespace Skillbox
                         }
 
                     // 4 - Редактирование записи
-                                                    // ????? Убрать пустую строку!!!!
-
                     case "4":
                         {
                             Console.WriteLine("Введите номер записи, которую надо отредактировать:");
@@ -89,10 +86,6 @@ namespace Skillbox
                             string st = Files.AddNewEmployee(id - 1);
 
                             rep.employees[id - 1] = new Employee(id, st);
-
-                            //rep.Edit(id, st);
-
-                            rep.Save(@"..\..\..\StaffOut.txt");
 
                             break;
                         }
@@ -121,6 +114,7 @@ namespace Skillbox
                     // 6 - Сортировка по возрастанию даты
                     case "6":
                         {
+                            rep.SortDateBirthAscending();
 
                             break;
                         }
@@ -128,6 +122,7 @@ namespace Skillbox
                     // 7 - Сортировка по убыванию даты
                     case "7":
                         {
+                            rep.SortDateBirthDescending();
 
                             break;
                         }

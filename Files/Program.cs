@@ -121,7 +121,7 @@ namespace Skillbox
             string age = Convert.ToInt32(DateTime.Now.Subtract(dBirth).TotalDays / 365.25).ToString();
 
             Console.WriteLine("\nВведите место рождения сотрудника");
-            string placeBirth = Console.ReadLine() + "\n";
+            string placeBirth = Console.ReadLine();
 
             int newRecord = recordNumber + 1;
 

@@ -81,7 +81,15 @@ namespace Skillbox
         /// <param name="indexString">индекс сотрудника</param>
         public void Delete(int indexString)
         {
-            if(indexString < index) this.employees[indexString - 1] = this.employees[index];
+            for (int i = indexString; i <= this.index; i++)
+            {
+                if (i <= this.index)
+                {
+                    this.employees[i - 1] = this.employees[i];
+                    this.employees[i - 1].Id = i;
+                }
+            }
+
             this.index--;
         }
 
@@ -137,6 +145,60 @@ namespace Skillbox
             using (var sw = new StreamWriter(pathOut, true))
             {
                 await sw.WriteLineAsync(line);
+            }
+        }
+
+        /// <summary>
+        /// Сортировка записей по дате рождения по возрастанию
+        /// </summary>
+        public void SortDateBirthAscending()
+        {
+            for(int i = 0; i < this.Count - 1; i++)
+            {
+                Employee minData = this[i];
+
+                int indexMin = i;
+
+                for(int j = i + 1; j < this.Count; j++)
+                {
+                    if(minData.DateBirth > this[j].DateBirth)
+                    {
+                        minData = this[j];
+
+                        indexMin = j;
+                    }
+                }
+
+                this[indexMin] = this[i];
+
+                this[i] = minData;
+            }
+        }
+
+        /// <summary>
+        /// Сортировка записей по дате рождения по убыванию
+        /// </summary>
+        public void SortDateBirthDescending()
+        {
+            for (int i = 0; i < this.Count - 1; i++)
+            {
+                Employee maxData = this[i];
+
+                int indexMax = i;
+
+                for (int j = i + 1; j < this.Count; j++)
+                {
+                    if (maxData.DateBirth < this[j].DateBirth)
+                    {
+                        maxData = this[j];
+
+                        indexMax = j;
+                    }
+                }
+
+                this[indexMax] = this[i];
+
+                this[i] = maxData;
             }
         }
 

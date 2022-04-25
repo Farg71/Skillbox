@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="EmployeeOld.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Program.cs~RF2f2a4629.TMP" />
   </ItemGroup>
 
