@@ -5,6 +5,9 @@ using System.IO;
 using System.Net;
 using System.Xml.Linq;
 
+using MyLibrary;
+using System.Xml.Serialization;
+using System.Data;
 
 namespace Skillbox
 {
@@ -34,98 +37,49 @@ namespace Skillbox
                             break;
                         }
 
-                        // Задание 2.Телефонная книга.
-                            //Что нужно сделать
-                            
-                            //Далее программа предлагает найти владельца по введенному номеру телефона.Пользователь вводит номер телефона
-                            //и ему выдаётся ФИО владельца.Если владельца по такому номеру телефона не зарегистрировано, программа выводит
-                            //на экран соответствующее сообщение.
-
-
-                            //Совет
-                            //Для того, чтобы находить значение в Dictionary, нужно использовать TryGetValue.
-
-
-
-                            //Что оценивается
-                            //Программа разделена на логические методы.
-                            //Для хранения элементов записной книжки используется Dictionary.
-
+                    // Задание 2.Телефонная книга.
                     case "2":
                         {
                             Dictionary<int, string> phoneBook = DictionaryFilling();
 
+                            DisplayOutput(phoneBook);
 
+                            OwnerSearch(phoneBook);
 
+                            break;
+                        }
 
+                    // Задание 3.Проверка повторов.
+                    case "3":
+                        {
+                            HashSet<int> numbers = HashSetCollection();
 
+                            Console.WriteLine("\tHashSet коллекция:\n");
 
-                            Console.WriteLine("Телефонная книга:\n");
-
-                            foreach(var e in phoneBook)
+                            foreach (int number in numbers)
                             {
-                                Console.WriteLine($"{e.Key} - {e.Value}");
+                                Console.WriteLine(number);
                             }
 
                             Console.ReadLine();
                             break;
                         }
 
-                        // Задание 3.Проверка повторов.
-                            //Что нужно сделать
-                            //Пользователь вводит число. Число сохраняется в HashSet коллекцию.Если такое число уже присутствует в коллекции, то пользователю на экран выводится сообщение, что число уже вводилось ранее. Если числа нет, то появляется сообщение о том, что число успешно сохранено. 
-
-
-
-                            //Советы и рекомендации
-                            //Для добавление числа в HashSet используйте метод Add.
-
-
-
-                            //Что оценивается
-                            //В программе в качестве коллекции используется HashSet.
-                    case "3":
-                        {
-
-                            break;
-                        }
-
-                        // Задание 4.Записная книжка.
-                            //Что нужно сделать
-                            //Программа спрашивает у пользователя данные о контакте:
-
-                            //ФИО
-                            //Улица
-                            //Номер дома
-                            //Номер квартиры
-                            //Мобильный телефон
-                            //Домашний телефон
-
-
-                            //С помощью XElement создайте xml файл, в котором есть введенная информация. XML файл должен содержать следующую структуру:
-
-                            //< Person name =”ФИО человека” >
-                            //    < Address >
-                            //        < Street > Название улицы </ Street >
-                            //        < HouseNumber > Номер дома </ HouseNumber >
-                            //        < FlatNumber > Номер квартиры </ FlatNumber >
-                            //    </ Address >
-                            //    < Phones >
-                            //        < MobilePhone > 89999999999999 </ MobilePhone >
-                            //        < FlatPhone > 123 - 45 - 67 < FlatPhone >
-                            //    </ Phones >
-                            //</ Person >
-
-
-                            //Советы и рекомендации
-                            //Заполняйте XElement в ходе заполнения данных. Изучите возможности XElement в документации Microsoft.
-
-
-
-                            //Что оценивается
-                            //Программа создаёт Xml файл, содержащий все данные о контакте.
+                    // Задание 4.Записная книжка.
                     case "4":
                         {
+                            NotebookList notebook = CreateNotebook();
+
+                            XmlSerialize(@"..\..\..\Notebook1.xml", notebook);
+
+                            notebook = XmlDeserialize(@"..\..\..\Notebook1.xml");
+
+                            foreach (var e in notebook.Notebook)
+                            {
+                                Console.WriteLine(e.Name);
+                            }
+
+                            Console.ReadLine();
 
                             break;
                         }
@@ -140,6 +94,163 @@ namespace Skillbox
                         }
                 }
             }
+        }
+
+        /// <summary>
+        /// Ввод данных в записную книжку
+        /// </summary>
+        /// <returns></returns>
+        private static NotebookList CreateNotebook()
+        {
+            NotebookList notebook = new NotebookList();
+            List<Person> notebookList = new List<Person>();
+
+            for (int i = 0; i < 2; i++)
+            {
+                Person person = new Person();
+                Address address = new Address();
+                Phones phones = new Phones();
+
+                Console.WriteLine("ФИО человека");
+                person.Name = Console.ReadLine();
+
+                Console.WriteLine("Название улицы");
+                address.Street = Console.ReadLine();
+
+                Console.WriteLine("Номер дома");
+                address.HouseNumber = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Номер квартиры");
+                address.FlatNumber = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Мобильник");
+                phones.MobilePhone = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Телефон");
+                phones.FlatPhone = int.Parse(Console.ReadLine());
+
+                person.Address = address;
+                person.Phones = phones;
+
+                notebookList.Add(person);
+            }
+
+            notebook.Notebook = notebookList;
+
+            return notebook;
+        }
+
+        /// <summary>
+        /// Серилизация Записной книжки
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void XmlSerialize(string filePath, NotebookList notebook)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(NotebookList));
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            {
+                xmlSerializer.Serialize(fs, notebook);
+
+                Console.WriteLine("Object has been serialized");
+            }
+        }
+
+        /// <summary>
+        /// Десерилизация Записной книжки
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static NotebookList XmlDeserialize(string filePath)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(NotebookList));
+            NotebookList notebook = new NotebookList();
+
+            using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
+            {
+                notebook = xmlSerializer.Deserialize(fs) as NotebookList;
+            }
+
+            return notebook;
+        }
+
+        /// <summary>
+        /// HashSet коллекция
+        /// </summary>
+        /// <returns></returns>
+        private static HashSet<int> HashSetCollection()
+        {
+            Console.Clear();
+            Console.WriteLine("\tИспользование коллекции HashSet:\n");
+            HashSet<int> numbers = new HashSet<int>();
+
+            while (true)
+            {
+                Console.WriteLine("\nВведите число:");
+                string numString = Console.ReadLine();
+
+                if (numString == "") break;
+
+                int number = int.Parse(numString);
+
+                if (numbers.Contains(number))
+                {
+                    Console.WriteLine("\nЕсть такое число!");
+                }
+                else
+                {
+                    numbers.Add(number);
+                    Console.WriteLine("Число успешно сохранено!");
+                }
+            }
+
+            return numbers;
+        }
+
+        /// <summary>
+        /// Поиск пользователя по номеру телефона
+        /// </summary>
+        /// <param name="phoneBook"></param>
+        private static void OwnerSearch(Dictionary<int, string> phoneBook)
+        {
+            Console.Clear();
+            Console.WriteLine("\tПоиск пользователя по номеру телефона:\n");
+
+            while (true)
+            {
+                Console.WriteLine("\nВведите номер телефона:");
+                string telString = Console.ReadLine();
+
+                if (telString == "") break;
+
+                int telNumber = int.Parse(telString);
+                string name;
+
+                if (!phoneBook.TryGetValue(telNumber, out name))
+                {
+                    Console.WriteLine("\nТакого номера нет!");
+                }
+                else
+                {
+                    Console.WriteLine($"Пользователь номера {telNumber} - {name}");
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Вывод телефонной книги на консоль
+        /// </summary>
+        /// <param name="phoneBook"></param>
+        private static void DisplayOutput(Dictionary<int, string> phoneBook)
+        {
+            Console.WriteLine("Телефонная книга:\n");
+
+            foreach (var e in phoneBook)
+            {
+                Console.WriteLine($"{e.Key} - {e.Value}");
+            }
+
+            Console.ReadLine();
         }
 
         /// <summary>

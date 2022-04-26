@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Notebook>
+    <Person name = "ФИО_человека">
+        <Address>
+            <Street> Название улицы </Street>
+            <HouseNumber> Номер дома </HouseNumber>
+            <FlatNumber> Номер квартиры </FlatNumber>
+        </Address>
+        <Phones>
+            <MobilePhone> 89999999999999 </MobilePhone>
+            <FlatPhone> 123 - 45 - 67 </FlatPhone>
+        </Phones>
+    </Person>
+</Notebook>

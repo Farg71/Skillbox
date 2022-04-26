@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NotebookList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Notebook>
+		<Person>
+			<Name>Sergej</Name>
+			<Address>
+				<Street>aaa</Street>
+				<HouseNumber>1</HouseNumber>
+				<FlatNumber>2</FlatNumber>
+			</Address>
+			<Phones>
+				<MobilePhone>4</MobilePhone>
+				<FlatPhone>5</FlatPhone>
+			</Phones>
+		</Person>
+		<Person>
+			<Name>Andrej</Name>
+			<Address>
+				<Street>sss</Street>
+				<HouseNumber>9</HouseNumber>
+				<FlatNumber>8</FlatNumber>
+			</Address>
+			<Phones>
+				<MobilePhone>7</MobilePhone>
+				<FlatPhone>6</FlatPhone>
+			</Phones>
+		</Person>
+	</Notebook>
+</NotebookList>
