@@ -1,0 +1,32 @@
+{
+  "t": "READY",
+  "s": 1,
+  "op": 0,
+  "d": {
+    "v": 6,
+    "user_settings": {},
+    "user": {
+      "verified": true,
+      "username": "TrialFromFarg_bot",
+      "mfa_enabled": false,
+      "id": "970283644319068160",
+      "flags": 0,
+      "email": null,
+      "discriminator": "4334",
+      "bot": true,
+      "avatar": null
+    },
+    "session_id": "8ec973957596cdace16e3a8a9ec0e7e0",
+    "relationships": [],
+    "private_channels": [],
+    "presences": [],
+    "guilds": [],
+    "guild_join_requests": [],
+    "geo_ordered_rtc_regions": [ "stockholm", "st-pete", "russia", "rotterdam", "bucharest" ],
+    "application": {
+      "id": "970283644319068160",
+      "flags": 262144
+    },
+    "_trace": [ "[\"gateway-prd-main-twx9\",{\"micros\":50498,\"calls\":[\"discord-sessions-green-prd-2-42\",{\"micros\":45886,\"calls\":[\"start_session\",{\"micros\":33746,\"calls\":[\"discord-api-55db4fc98f-x4z84\",{\"micros\":29556,\"calls\":[\"get_user\",{\"micros\":5318},\"add_authorized_ip\",{\"micros\":2133},\"get_guilds\",{\"micros\":3682},\"coros_wait\",{\"micros\":1}]}]},\"guilds_connect\",{\"micros\":25,\"calls\":[]},\"presence_connect\",{\"micros\":6858,\"calls\":[]}]}]}]" ]
+  }
+}

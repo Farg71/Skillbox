@@ -43,10 +43,14 @@ namespace Networking
             Thread taskBotWithLibrary = new Thread(TelegramBots.BotWithLibrary);
             taskBotWithLibrary.Start();
 
-            Thread taskDiscordBot = new Thread(DiscordBot.Bot);
-            taskDiscordBot.Start();
+            //Thread taskDiscordBot = new Thread(DiscordBot.MainAsync);
+            //taskDiscordBot.Start();
+
+            DiscordBot discordBot = new DiscordBot();
+            discordBot.Bot();
 
             Console.ReadLine();
         }
+
     }
 }
