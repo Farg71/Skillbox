@@ -17,6 +17,8 @@ Collections/bin/
 Collections/obj/
 MyLibrary/bin/
 MyLibrary/obj/
+Networking/bin/
+Networking/obj/
 .vs/
 *.log
 *.suo

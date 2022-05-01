@@ -5,9 +5,10 @@ using System.IO;
 using System.Net;
 using System.Xml.Linq;
 
-using MyLibrary;
 using System.Xml.Serialization;
 using System.Data;
+
+using Skillbox.Notebook;
 
 namespace Skillbox
 {
@@ -102,6 +103,7 @@ namespace Skillbox
         /// <returns></returns>
         private static NotebookList CreateNotebook()
         {
+
             NotebookList notebook = new NotebookList();
             List<Person> notebookList = new List<Person>();
 
