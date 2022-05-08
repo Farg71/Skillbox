@@ -13,7 +13,8 @@ using Telegram.Bot.Types;
 using Telegram.Bot;
 
 using MyLibrary.BotDictionary;
-
+using Newtonsoft.Json;
+using File = System.IO.File;
 
 namespace Networking.BotsClass
 {
@@ -41,8 +42,8 @@ namespace Networking.BotsClass
                 // UpdateType.ShippingQuery:
                 // UpdateType.PreCheckoutQuery:
                 // UpdateType.Poll:
-                UpdateType.Message => BotOnMessageReceived(botClient, update.Message!),
-                UpdateType.EditedMessage => BotOnMessageReceived(botClient, update.EditedMessage!),
+                UpdateType.Message => BotOnMessageReceived(botClient, update!),
+                UpdateType.EditedMessage => BotOnMessageReceived(botClient, update!),
                 UpdateType.CallbackQuery => BotOnCallbackQueryReceived(botClient, update.CallbackQuery!),
                 UpdateType.InlineQuery => BotOnInlineQueryReceived(botClient, update.InlineQuery!),
                 UpdateType.ChosenInlineResult => BotOnChosenInlineResultReceived(botClient, update.ChosenInlineResult!),
@@ -59,9 +60,16 @@ namespace Networking.BotsClass
             }
         }
 
-        private static async Task BotOnMessageReceived(ITelegramBotClient botClient, Message message)
+        private static async Task BotOnMessageReceived(ITelegramBotClient botClient, Update update)
         {
-            Console.WriteLine($"Chat.Id: {message.Chat.Id} Receive message type: {message.Type}, from: {message.From.FirstName} {message.From.LastName}, text: {message.Text}");
+            Program.updates.Add(update);
+
+            Message message = update.Message!;
+
+            Console.WriteLine($"Chat.Id: {message.Chat.Id} Receive message type: {message.Type}, from: {message.From.FirstName} " +
+                $"{message.From.LastName}, text: {message.Text}\nMessageId {message.MessageId} ");
+
+            if (Forex.IsForex) await Forex.GetForexRequest(botClient, message);
 
             if (message.Type == MessageType.Document)
             {
@@ -85,14 +93,15 @@ namespace Networking.BotsClass
                 "/request" => RequestContactAndLocation(botClient, message),
                 "/help" => Help(botClient, message),
                 "/start" => Start(botClient, message),
+                "/forex" => Forex.ForexCommand(botClient, message),
                 _ => TextOutput(botClient, message)
             };
 
             Message sentMessage = await action;
             //Console.WriteLine($"The message was sent with id: {sentMessage.MessageId}");
 
-            // Send inline keyboard
-            // You can process responses in BotOnCallbackQueryReceived handler
+            // Отправляем встроенную клавиатуру
+            // Можем обрабатывать ответы в обработчике BotOnCallbackQueryReceived
             static async Task<Message> SendInlineKeyboard(ITelegramBotClient botClient, Message message)
             {
                 await botClient.SendChatActionAsync(message.Chat.Id, ChatAction.Typing);
@@ -181,7 +190,8 @@ namespace Networking.BotsClass
                                      "/keyboard - Отправить пользовательскую клавиатуру\n" +
                                      "/remove   - Удалить пользовательскую клавиатуру\n" +
                                      "/photo    - Отправить фото\n" +
-                                     "/request  - Запросить местоположение или контакты\n";
+                                     "/request  - Запросить местоположение или контакты\n" +
+                                     "/forex    - Запрос финансовой информации\n";
 
                 return await botClient.SendTextMessageAsync(chatId: message.Chat.Id,
                                                             text: usage,
@@ -190,26 +200,31 @@ namespace Networking.BotsClass
 
             static async Task<Message> TextOutput(ITelegramBotClient botClient, Message message)
             {
-                Answers answers = new Answers(message);
+                if (!Forex.IsForex && !Forex.IsCurrencyPair)
+                {
+                    Answers answers = new Answers(message);
 
-                string text = answers.AnswersText(message);
+                    string text = answers.AnswersText(message);
 
-                return await botClient.SendTextMessageAsync(chatId: message.Chat.Id,
-                                                            text: text,
-                                                            replyMarkup: new ReplyKeyboardRemove());
+                    return await botClient.SendTextMessageAsync(chatId: message.Chat.Id,
+                                                                text: text,
+                                                                replyMarkup: new ReplyKeyboardRemove());
+                }
+                else
+                {
+                    return message;
+                }
             }
 
             static async Task<Message> GetDocument(ITelegramBotClient botClient, Message message)
             {
                 var file = await botClient.GetFileAsync(message.Document.FileId);
 
-                using (FileStream stream = new System.IO.FileStream(@"..\..\..\Files\Document\" + message.Document.FileName, FileMode.OpenOrCreate))
+                using (FileStream stream = new System.IO.FileStream(@"..\..\..\Files\Document\" + message.Document.FileName,
+                    FileMode.OpenOrCreate))
                 {
                     await botClient.GetInfoAndDownloadFileAsync(message.Document.FileId, stream);
                 }
-
-
-
 
                 Console.WriteLine($"{file.FileSize} - {file.FileId} - {file.FilePath} - {message.Document.FileName}");
 
@@ -238,12 +253,23 @@ namespace Networking.BotsClass
                                                             text: text,
                                                             replyMarkup: new ReplyKeyboardRemove());
             }
-
-
-
         }
 
-        // Process Inline Keyboard callback data
+        /// <summary>
+        /// Метод вывода сообщения в Телеграм
+        /// </summary>
+        /// <param name="botClient"></param>
+        /// <param name="message"></param>
+        /// <param name="sentText">Текст ответа Бота</param>
+        /// <returns></returns>
+        internal static async Task<Message> SentMessage(ITelegramBotClient botClient, Message message, string sentText)
+        {
+            return await botClient.SendTextMessageAsync(chatId: message.Chat.Id,
+                                                        text: sentText,
+                                                        replyMarkup: new ReplyKeyboardRemove());
+        }
+
+        // Обработка данных обратного вызова встроенной клавиатуры
         private static async Task BotOnCallbackQueryReceived(ITelegramBotClient botClient, CallbackQuery callbackQuery)
         {
             await botClient.AnswerCallbackQueryAsync(
@@ -287,6 +313,5 @@ namespace Networking.BotsClass
             Console.WriteLine($"Unknown update type: {update.Type}");
             return Task.CompletedTask;
         }
-
     }
 }

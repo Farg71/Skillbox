@@ -1,0 +1,118 @@
+{
+  "user": {
+    "id": 5316837753,
+    "is_bot": true,
+    "first_name": "Пробный бот",
+    "username": "TrialFromFarg_bot",
+    "can_join_groups": true,
+    "can_read_all_group_messages": false,
+    "supports_inline_queries": false
+  },
+  "updates": [
+    {
+      "update_id": 41726534,
+      "message": {
+        "message_id": 1066,
+        "from": {
+          "id": 507230271,
+          "is_bot": false,
+          "first_name": "Сергей",
+          "last_name": "Иванов",
+          "username": "Farg71",
+          "language_code": "ru"
+        },
+        "date": 1652026415,
+        "chat": {
+          "id": 507230271,
+          "type": "private",
+          "username": "Farg71",
+          "first_name": "Сергей",
+          "last_name": "Иванов"
+        },
+        "text": "ааааааааа"
+      }
+    },
+    {
+      "update_id": 41726535,
+      "message": {
+        "message_id": 1068,
+        "from": {
+          "id": 507230271,
+          "is_bot": false,
+          "first_name": "Сергей",
+          "last_name": "Иванов",
+          "username": "Farg71",
+          "language_code": "ru"
+        },
+        "date": 1652026439,
+        "chat": {
+          "id": 507230271,
+          "type": "private",
+          "username": "Farg71",
+          "first_name": "Сергей",
+          "last_name": "Иванов"
+        },
+        "text": "бббббббббб"
+      }
+    },
+    {
+      "update_id": 41726536,
+      "message": {
+        "message_id": 1070,
+        "from": {
+          "id": 1968570302,
+          "is_bot": false,
+          "first_name": "Yuki",
+          "username": "Fresh22000",
+          "language_code": "ru"
+        },
+        "date": 1652026525,
+        "chat": {
+          "id": 1968570302,
+          "type": "private",
+          "username": "Fresh22000",
+          "first_name": "Yuki"
+        },
+        "text": "Привет"
+      }
+    },
+    {
+      "update_id": 41726537,
+      "message": {
+        "message_id": 1072,
+        "from": {
+          "id": 1908216741,
+          "is_bot": false,
+          "first_name": "Виктория",
+          "language_code": "ru"
+        },
+        "date": 1652026979,
+        "chat": {
+          "id": 1908216741,
+          "type": "private",
+          "first_name": "Виктория"
+        },
+        "text": "Привет"
+      }
+    },
+    {
+      "update_id": 41726538,
+      "message": {
+        "message_id": 1074,
+        "from": {
+          "id": 1908216741,
+          "is_bot": false,
+          "first_name": "Виктория",
+          "language_code": "ru"
+        },
+        "date": 1652026983,
+        "chat": {
+          "id": 1908216741,
+          "type": "private",
+          "first_name": "Виктория"
+        },
+        "text": "Пока"
+      }
+    }
+  ]
+}

@@ -15,7 +15,9 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Extensions.Polling;
 
 using MyLibrary.BotDictionary;
-
+using System.Diagnostics;
+using Newtonsoft.Json;
+using File = System.IO.File;
 
 namespace Networking
 {
@@ -31,21 +33,31 @@ namespace Networking
 
         public static async void BotWithLibrary()
         {
+            Forex forex = new Forex();
+
             botClient = new TelegramBotClient(TelegramToken);
 
             User me = await botClient.GetMeAsync();
             Console.Title = me.Username ?? "My awesome Bot";
 
-            //var update = botClient.GetUpdatesAsync();
+            Program.user = me;
+
             //foreach (var up in update.Result)
             //{
-            //    var message = up.Message;
-            //    var mm = Handlers.BotOnMessageReceivedTextAsync(botClient, message);
-            //    var st = mm.IsFaulted ? "----" : mm.Result.Text;
-            //    Console.WriteLine($"{st}- {up.Message.Text}");
+            //    //var message = up.Message;
+            //    //var mm = Handlers.BotOnMessageReceivedTextAsync(botClient, message);
+            //    //var st = mm.IsFaulted ? "----" : mm.Result.Text;
+            //    //Console.WriteLine($"{st}- {up.Message.Text}");
+
+            //    //Console.WriteLine($"{up.Id}- {up.Type} - {up.Message.Text}");
+
+            //    updates.Add(up);
             //}
 
+
             using var cts = new CancellationTokenSource();
+
+            Console.WriteLine($"IsCancellationRequested - {cts.IsCancellationRequested}");
 
             // StartReceiver не блокирует вызывающий поток. Получение выполняется в ThreadPool.
             botClient.StartReceiving(updateHandler: Handlers.HandleUpdateAsync,
@@ -57,6 +69,7 @@ namespace Networking
                                cancellationToken: cts.Token);
 
             Console.WriteLine($"Начинаю прослушивать @{me.Username}");
+            Debug.WriteLine($"Начинаю прослушивать @{me.Username}");
             Console.ReadLine();
 
             // Отправить запрос на отмену, чтобы остановить бота

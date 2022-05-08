@@ -8,6 +8,7 @@ using MyLibrary.BotDictionary;
 using Discord;
 using Discord.WebSocket;
 using Networking.BotsClass.Discord;
+using Discord.Commands;
 
 namespace Networking
 {
@@ -18,7 +19,7 @@ namespace Networking
         static string TelegramToken = System.IO.File.ReadAllText(documentDirPath + toketFilePath);
 
         private DiscordSocketClient discordClient;
-
+        private CommandService command;
 
 
 
@@ -29,6 +30,53 @@ namespace Networking
             Console.ReadLine();
 
             Console.WriteLine("Discord Bot запустился :)))");
+        }
+
+
+
+
+        public async Task RunBot()
+        {
+            discordClient = new DiscordSocketClient();
+            command = new CommandService();
+            await discordClient.LoginAsync(TokenType.Bot, TelegramToken);
+            await discordClient.StartAsync();
+            discordClient.Log += Log;
+            discordClient.MessageReceived += CommandHandler;
+            discordClient.ButtonExecuted += ButtonClick;
+            await Task.Delay(-1);
+            Console.ReadLine();
+
+
+        }
+
+        public async Task ButtonClick(SocketMessageComponent arg)
+        {
+            await arg.DeferAsync();
+
+            if(arg.Data.CustomId == "AllCommands")
+            {
+                await arg.Channel.SendMessageAsync($"Доступные команды:\n/Hi - поздороваться с ботом\n .........");
+            }
+
+        }
+
+
+
+        /// <summary>
+        /// Обработчик комманд
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        private Task CommandHandler(SocketMessage arg)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Task Log(LogMessage arg)
+        {
+            throw new NotImplementedException();
         }
     }
 }
