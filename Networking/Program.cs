@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Net;
 using System.Xml.Linq;
@@ -13,7 +14,6 @@ using Networking.BotsClass;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
 using File = System.IO.File;
 
 namespace Networking
@@ -25,7 +25,7 @@ namespace Networking
         //static internal List<Update> updates = new List<Update>();
 
         public static User user { get; set; }
-        public static List<Update> updates { get; set; }
+
 
         static void Main(string[] args)
         {
@@ -50,9 +50,10 @@ namespace Networking
             #endregion
 
             user = new User();
-            updates = new List<Update>();
+            Handlers.UpdatesList = new List<Update>();
+            Handlers.UpdatesCollection = new ObservableCollection<Update>();
 
-            if (File.Exists(PathToDirectory.FilesDir + "telegramBotLog.json")) JsonFileRead();
+            if (File.Exists(PathToDirectory.FilesDir + "telegramBotLog.json")) Methods.JsonFileRead();
 
             //Thread taskPrimitiveBot = new Thread(TelegramBots.PrimitiveBot);
             //taskPrimitiveBot.Start();
@@ -69,44 +70,9 @@ namespace Networking
             Console.ReadLine();
             //Console.WriteLine("Сохранить!");
 
-            JsonFileWrite();
+            Methods.JsonFileWrite(user);
 
             //Console.ReadLine();
-        }
-
-        private static void JsonFileWrite()
-        {
-            string jsonUpdates = JsonConvert.SerializeObject(updates);
-            string jsonUser = JsonConvert.SerializeObject(user);
-
-            JObject main = new JObject();
-
-            JArray array = JArray.Parse(jsonUpdates);
-            JObject us = JObject.Parse(jsonUser);
-
-            main["user"] = us;
-            main["updates"] = array;
-
-            //Console.WriteLine(main.ToString());
-
-            File.WriteAllText(PathToDirectory.FilesDir + "telegramBotLog.json", main.ToString());
-        }
-
-        private static void JsonFileRead()
-        {
-            string json = File.ReadAllText(PathToDirectory.FilesDir + "telegramBotLog.json");
-
-            string jsonUser = JObject.Parse(json)["user"].ToString();
-            user = JsonConvert.DeserializeObject<User>(jsonUser);
-
-            string jsonUpdates = JObject.Parse(json)["updates"].ToString();
-            updates = JsonConvert.DeserializeObject<List<Update>>(jsonUpdates);
-
-            //Console.WriteLine(user.Username);
-            //foreach (var up in updates)
-            //{
-            //    Console.WriteLine(up.Message.Text);
-            //}
         }
     }
 }

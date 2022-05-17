@@ -10,9 +10,9 @@
   },
   "updates": [
     {
-      "update_id": 41726534,
+      "update_id": 41726558,
       "message": {
-        "message_id": 1066,
+        "message_id": 1110,
         "from": {
           "id": 507230271,
           "is_bot": false,
@@ -21,7 +21,7 @@
           "username": "Farg71",
           "language_code": "ru"
         },
-        "date": 1652026415,
+        "date": 1652358410,
         "chat": {
           "id": 507230271,
           "type": "private",
@@ -29,13 +29,13 @@
           "first_name": "Сергей",
           "last_name": "Иванов"
         },
-        "text": "ааааааааа"
+        "text": "zc"
       }
     },
     {
-      "update_id": 41726535,
+      "update_id": 41726559,
       "message": {
-        "message_id": 1068,
+        "message_id": 1112,
         "from": {
           "id": 507230271,
           "is_bot": false,
@@ -44,7 +44,7 @@
           "username": "Farg71",
           "language_code": "ru"
         },
-        "date": 1652026439,
+        "date": 1652358417,
         "chat": {
           "id": 507230271,
           "type": "private",
@@ -52,66 +52,143 @@
           "first_name": "Сергей",
           "last_name": "Иванов"
         },
-        "text": "бббббббббб"
+        "text": "hi"
       }
     },
     {
-      "update_id": 41726536,
+      "update_id": 41726560,
       "message": {
-        "message_id": 1070,
+        "message_id": 1114,
         "from": {
-          "id": 1968570302,
+          "id": 507230271,
           "is_bot": false,
-          "first_name": "Yuki",
-          "username": "Fresh22000",
+          "first_name": "Сергей",
+          "last_name": "Иванов",
+          "username": "Farg71",
           "language_code": "ru"
         },
-        "date": 1652026525,
+        "date": 1652358424,
         "chat": {
-          "id": 1968570302,
+          "id": 507230271,
           "type": "private",
-          "username": "Fresh22000",
-          "first_name": "Yuki"
+          "username": "Farg71",
+          "first_name": "Сергей",
+          "last_name": "Иванов"
         },
-        "text": "Привет"
+        "text": "привет"
       }
     },
     {
-      "update_id": 41726537,
+      "update_id": 41726561,
       "message": {
-        "message_id": 1072,
+        "message_id": 1116,
         "from": {
-          "id": 1908216741,
+          "id": 507230271,
           "is_bot": false,
-          "first_name": "Виктория",
+          "first_name": "Сергей",
+          "last_name": "Иванов",
+          "username": "Farg71",
           "language_code": "ru"
         },
-        "date": 1652026979,
+        "date": 1652358432,
         "chat": {
-          "id": 1908216741,
+          "id": 507230271,
           "type": "private",
-          "first_name": "Виктория"
+          "username": "Farg71",
+          "first_name": "Сергей",
+          "last_name": "Иванов"
         },
-        "text": "Привет"
+        "text": "/help",
+        "entities": [
+          {
+            "type": "bot_command",
+            "offset": 0,
+            "length": 5
+          }
+        ]
       }
     },
     {
-      "update_id": 41726538,
+      "update_id": 41726562,
       "message": {
-        "message_id": 1074,
+        "message_id": 1118,
         "from": {
-          "id": 1908216741,
+          "id": 507230271,
           "is_bot": false,
-          "first_name": "Виктория",
+          "first_name": "Сергей",
+          "last_name": "Иванов",
+          "username": "Farg71",
           "language_code": "ru"
         },
-        "date": 1652026983,
+        "date": 1652358437,
         "chat": {
-          "id": 1908216741,
+          "id": 507230271,
           "type": "private",
-          "first_name": "Виктория"
+          "username": "Farg71",
+          "first_name": "Сергей",
+          "last_name": "Иванов"
         },
-        "text": "Пока"
+        "text": "/start",
+        "entities": [
+          {
+            "type": "bot_command",
+            "offset": 0,
+            "length": 6
+          }
+        ]
+      }
+    },
+    {
+      "update_id": 41726563,
+      "message": {
+        "message_id": 1120,
+        "from": {
+          "id": 507230271,
+          "is_bot": false,
+          "first_name": "Сергей",
+          "last_name": "Иванов",
+          "username": "Farg71",
+          "language_code": "ru"
+        },
+        "date": 1652358444,
+        "chat": {
+          "id": 507230271,
+          "type": "private",
+          "username": "Farg71",
+          "first_name": "Сергей",
+          "last_name": "Иванов"
+        },
+        "text": "/forex",
+        "entities": [
+          {
+            "type": "bot_command",
+            "offset": 0,
+            "length": 6
+          }
+        ]
+      }
+    },
+    {
+      "update_id": 41726564,
+      "message": {
+        "message_id": 1122,
+        "from": {
+          "id": 507230271,
+          "is_bot": false,
+          "first_name": "Сергей",
+          "last_name": "Иванов",
+          "username": "Farg71",
+          "language_code": "ru"
+        },
+        "date": 1652358453,
+        "chat": {
+          "id": 507230271,
+          "type": "private",
+          "username": "Farg71",
+          "first_name": "Сергей",
+          "last_name": "Иванов"
+        },
+        "text": "EURUSD"
       }
     }
   ]

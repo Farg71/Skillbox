@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace Networking.BotsClass
 {
     public class Handlers
     {
+        public static ObservableCollection<Update> UpdatesCollection { get; set; }
+        public static List<Update> UpdatesList { get; set; }
         public static Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
         {
             var ErrorMessage = exception switch
@@ -60,9 +63,12 @@ namespace Networking.BotsClass
             }
         }
 
-        private static async Task BotOnMessageReceived(ITelegramBotClient botClient, Update update)
+        public static async Task BotOnMessageReceived(ITelegramBotClient botClient, Update update)
         {
-            Program.updates.Add(update);
+            //UpdatesCollection.Add(update);
+
+            // Networking
+            UpdatesList.Add(update);
 
             Message message = update.Message!;
 
@@ -200,6 +206,8 @@ namespace Networking.BotsClass
 
             static async Task<Message> TextOutput(ITelegramBotClient botClient, Message message)
             {
+                //return message;
+
                 if (!Forex.IsForex && !Forex.IsCurrencyPair)
                 {
                     Answers answers = new Answers(message);
@@ -220,7 +228,7 @@ namespace Networking.BotsClass
             {
                 var file = await botClient.GetFileAsync(message.Document.FileId);
 
-                using (FileStream stream = new System.IO.FileStream(@"..\..\..\Files\Document\" + message.Document.FileName,
+                using (FileStream stream = new System.IO.FileStream(PathToDirectory.DocumentDir + message.Document.FileName,
                     FileMode.OpenOrCreate))
                 {
                     await botClient.GetInfoAndDownloadFileAsync(message.Document.FileId, stream);
@@ -242,7 +250,6 @@ namespace Networking.BotsClass
                 return await botClient.SendTextMessageAsync(chatId: message.Chat.Id,
                                                             text: $"Получил документ: {message.Document.FileName}",
                                                             replyMarkup: new ReplyKeyboardRemove());
-
             }
 
             static async Task<Message> Help(ITelegramBotClient botClient, Message message)
@@ -255,6 +262,18 @@ namespace Networking.BotsClass
             }
         }
 
+        //public static void SentMessage(TelegramBotClient botClient, string text)
+        //{
+
+        //    var update = botClient.GetUpdatesAsync().Result;
+
+
+        //    Message message;
+
+        //}
+
+
+
         /// <summary>
         /// Метод вывода сообщения в Телеграм
         /// </summary>
@@ -262,7 +281,7 @@ namespace Networking.BotsClass
         /// <param name="message"></param>
         /// <param name="sentText">Текст ответа Бота</param>
         /// <returns></returns>
-        internal static async Task<Message> SentMessage(ITelegramBotClient botClient, Message message, string sentText)
+        public static async Task<Message> SentMessage(ITelegramBotClient botClient, Message message, string sentText)
         {
             return await botClient.SendTextMessageAsync(chatId: message.Chat.Id,
                                                         text: sentText,

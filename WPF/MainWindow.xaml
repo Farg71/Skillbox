@@ -1,28 +1,149 @@
-﻿<Window
-    x:Class="WPF.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:WPF"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Telegram Bot Window"
-    Width="1000"
-    Height="750"
-    MinWidth="150"
-    MinHeight="100"
-    Background="White"
-    mc:Ignorable="av">
+﻿<Window x:Name="mainWindow"
+        x:Class="WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:WPF"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Width="1000"
+        Height="750"
+        MinWidth="150"
+        MinHeight="100"
+        Background="White"
+        mc:Ignorable="av"
+        Closed="mainWindow_Closed" Activated="mainWindow_Activated" Closing="mainWindow_Closing"
+        >
+    
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="35*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="85*"/>
+            <!--<ColumnDefinition Width="150"/>-->
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="130"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <Border BorderBrush="Black"
+                Margin="5"
+                CornerRadius="5"
+                Padding="5"
+                BorderThickness="1"
+                Grid.Row="1"
+                Grid.RowSpan="3"
+                Grid.Column="1">
+
+            <ListBox HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     x:Name="usersList">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Padding="5" FontSize="20" Text="{Binding UserName}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+        <Border BorderBrush="Black"
+                Margin="5"
+                CornerRadius="5"
+                Padding="5"
+                BorderThickness="1"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="3">
+
+            <ListBox HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     x:Name="concreteUsersChat"
+                     ItemsSource="{Binding ElementName=usersList, Path=SelectedItem.ChatId}"
+                     FontSize="20">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#FF2B5278"
+                                Margin="5"
+                                CornerRadius="5"
+                                Padding="15,5">
+                            <TextBlock Text="{Binding}" FontSize="20" Foreground="White"/>
+                        </Border>
+
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                     <!--ItemsSource="{Binding ElementName=usersList, Path=SelectedItem.Messages.Item3}"-->
+
+            </ListBox>
+        </Border>
+
+        <Border BorderBrush="Black"
+                Margin="5"
+                CornerRadius="5"
+                Padding="5"
+                BorderThickness="1"
+                Grid.Row="3"
+                Grid.Column="3">
+
+            <StackPanel>
+                <TextBox Height="60"
+                         x:Name="txtBxSendMsg"
+                         FontSize="20"
+                         TextWrapping="Wrap"
+                         AutoWordSelection="True"
+                         Margin="5"
+                         VerticalContentAlignment="Top"/>
+
+                <Button Content="Send"
+                        Margin="5"
+                        x:Name="btnSendMsg"
+                        FontSize="20" 
+                        Click="btnSendMsg_Click"/>
+
+            </StackPanel>
+
+        </Border>
+
+        <GridSplitter Grid.Column="2"
+                      Grid.RowSpan="4"
+                      HorizontalAlignment="Center"
+                      Background="Black"
+                      Opacity="0.5"
+                      Width="2"/>
+
         <StatusBar
-            Height="30"
-            VerticalAlignment="Bottom"
-            Background="#FF989494">
+            VerticalAlignment="Top"
+            Background="#FF989494"
+            Margin="0"
+            Grid.ColumnSpan="6"
+            Grid.Row="4">
+            
             <Label x:Name="labelStatus" Content="Telegram connection status:" />
             <Rectangle
                 x:Name="rectStatus"
-                Width="40"
+                Width="20"
                 Height="20"
                 Stroke="Black" />
+            
         </StatusBar>
+
+        <Menu x:Name="menu" Grid.ColumnSpan="6">
+            <MenuItem Header="File">
+                <MenuItem x:Name="bot_Open"
+                          Header="Telegram Bot Open"
+                          Click="bot_Open_Click"/>
+                
+                <MenuItem x:Name="bot_Close"
+                          Header="Telegram Bot Close"
+                          Click="bot_Close_Click"/>
+            </MenuItem>
+            <MenuItem Header="Help"/>
+        </Menu>
+
     </Grid>
 </Window>

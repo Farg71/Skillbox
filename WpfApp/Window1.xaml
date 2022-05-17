@@ -26,7 +26,8 @@
                    Text="Да"
                    Width="100"
                    Background="Beige"
-                   TextAlignment="Center" MouseDown="TxtYes_MouseDown"
+                   TextAlignment="Center" 
+                   MouseDown="TxtYes_MouseDown"
                    
                    />
         <TextBlock x:Name="txtNo"
@@ -37,7 +38,8 @@
                    Text="Нет"
                    Width="100"
                    Background="Beige"
-                   TextAlignment="Center" MouseEnter="TxtNo_MouseEnter"
+                   TextAlignment="Center"
+                   MouseEnter="TxtNo_MouseEnter"
                    />
 
     </Canvas>

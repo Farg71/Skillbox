@@ -20,6 +20,11 @@ namespace WPF
         {
             //base.OnStartup(e);
             //MessageBox.Show("Hello");
+
+            //TokenInput tokenInput = new TokenInput();
+            //tokenInput.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            //tokenInput.Show();
         }
     }
 }

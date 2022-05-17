@@ -32,8 +32,8 @@ namespace Networking.BotsClass
 
             #region PrimitiveDictionary
 
-            //Dialog dialog = new Dialog();
-            //AnswersDictionary = dialog.Answers;
+            Dialog dialog = new Dialog();
+            AnswersDictionary = dialog.Answers;
 
             #endregion
 

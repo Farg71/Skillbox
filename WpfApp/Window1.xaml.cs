@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +27,7 @@ namespace WpfApp
 
         private void TxtYes_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            //SystemSounds.Beep.Play();
             MessageBox.Show($"Я в этом не сомневался");
         }
 
@@ -38,7 +40,7 @@ namespace WpfApp
             Canvas.SetLeft(txtYes, posLeftTxtNo);
             Canvas.SetTop(txtNo, posLeftTxtYes);
 
-            //SystemSound.Hand.Play();
+            //SystemSounds.Hand.Play();
 
         }
     }

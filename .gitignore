@@ -19,6 +19,9 @@ MyLibrary/bin/
 MyLibrary/obj/
 Networking/bin/
 Networking/obj/
+WPF/bin/
+WPF/obj/
+WpfApp/
 .vs/
 *.log
 *.suo

@@ -18,6 +18,7 @@ using MyLibrary.BotDictionary;
 using System.Diagnostics;
 using Newtonsoft.Json;
 using File = System.IO.File;
+using Discord;
 
 namespace Networking
 {
@@ -34,6 +35,7 @@ namespace Networking
         public static async void BotWithLibrary()
         {
             Forex forex = new Forex();
+            Handlers.UpdatesList = new List<Update>();
 
             botClient = new TelegramBotClient(TelegramToken);
 
@@ -42,19 +44,22 @@ namespace Networking
 
             Program.user = me;
 
+            //var update = botClient.GetUpdatesAsync();
+
             //foreach (var up in update.Result)
             //{
-            //    //var message = up.Message;
-            //    //var mm = Handlers.BotOnMessageReceivedTextAsync(botClient, message);
-            //    //var st = mm.IsFaulted ? "----" : mm.Result.Text;
-            //    //Console.WriteLine($"{st}- {up.Message.Text}");
+            //    var mm = Handlers.BotOnMessageReceived(botClient, up);
 
-            //    //Console.WriteLine($"{up.Id}- {up.Type} - {up.Message.Text}");
+            //    var st = mm.IsFaulted ? "----" : up.Message.Text;
+            //    Console.WriteLine($"{st}- {up.Message.Text}");
 
-            //    updates.Add(up);
+            //    Console.WriteLine($"{up.Id}- {up.Type} - {up.Message.Text}");
+
+            //    //updates.Add(up);
             //}
 
 
+            
             using var cts = new CancellationTokenSource();
 
             Console.WriteLine($"IsCancellationRequested - {cts.IsCancellationRequested}");

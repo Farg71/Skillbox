@@ -5,10 +5,50 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using Telegram.Bot.Types;
+using File = System.IO.File;
+
 namespace Networking.BotsClass
 {
     public static class Methods
     {
+        public static void JsonFileWrite(User user)
+        {
+            string jsonUpdates = JsonConvert.SerializeObject(Handlers.UpdatesList);
+            string jsonUser = JsonConvert.SerializeObject(user);
+
+            JObject main = new JObject();
+
+            JArray array = JArray.Parse(jsonUpdates);
+            JObject us = JObject.Parse(jsonUser);
+
+            main["user"] = us;
+            main["updates"] = array;
+
+            //Console.WriteLine(main.ToString());
+
+            File.WriteAllText(PathToDirectory.FilesDir + "telegramBotLog.json", main.ToString());
+        }
+
+        public static void JsonFileRead()
+        {
+            string json = File.ReadAllText(PathToDirectory.FilesDir + "telegramBotLog.json");
+
+            //string jsonUser = JObject.Parse(json)["user"].ToString();
+            //user = JsonConvert.DeserializeObject<User>(jsonUser);
+
+            string jsonUpdates = JObject.Parse(json)["updates"].ToString();
+            Handlers.UpdatesList = JsonConvert.DeserializeObject<List<Update>>(jsonUpdates);
+
+            //Console.WriteLine(user.Username);
+            //foreach (var up in updates)
+            //{
+            //    Console.WriteLine(up.Message.Text);
+            //}
+        }
+
         /// <summary>
         /// Метод получения входящих обновлений с использованием long polling. Возвращается массив объектов Update.
         /// </summary>
