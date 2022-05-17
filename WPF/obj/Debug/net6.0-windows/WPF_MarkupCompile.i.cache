@@ -9,12 +9,12 @@ WPF
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-E:\VS Projects\Skillbox\WPF\App.xaml
-2-1165575137
+
+3627408387
 
 9-2109060634
 198-111165251
-MainWindow.xaml;TokenInput.xaml;
+App.xaml;MainWindow.xaml;TokenInput.xaml;
 
 False
 

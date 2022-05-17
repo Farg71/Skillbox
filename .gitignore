@@ -21,7 +21,7 @@ Networking/bin/
 Networking/obj/
 WPF/bin/
 WPF/obj/
-WpfApp/
+WpfApp
 .vs/
 *.log
 *.suo
