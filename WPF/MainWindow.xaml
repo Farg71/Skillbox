@@ -85,7 +85,7 @@
             <ListBox HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
                      x:Name="concreteUsersChat"
-                     FontSize="20" 
+                     FontSize="12" 
                      ItemsSource="{Binding Metodes.BotUsersCollection}"
                      av:ItemsSource="{av:SampleData ItemCount=5}"
                      >

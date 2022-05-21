@@ -159,7 +159,17 @@ namespace WPF
         {
             var user = Metodes.BotUsersCollection.Where(x => x.ChatId == Convert.ToInt64(chatId.Text)).First().Messages.ToList();
 
-            concreteUsersChat.ItemsSource = user;
+            //var u = user.Select((l) => $"{l.Item2} - {l.Item3}").Last();
+            //var u = user.Select((l) => $"{l.Item2.} - {l.Item3}");
+
+            var us = user.OrderByDescending(x => x.Item2);
+
+            var u = us.Select((l) => $"{l.Item2.TimeOfDay} - {l.Item3}");
+
+
+            concreteUsersChat.ItemsSource = u;
+
+
         }
     }
 }
