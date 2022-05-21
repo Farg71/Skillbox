@@ -48,6 +48,7 @@
                      x:Name="usersList"
                      ItemsSource="{Binding Metodes.BotUsersCollection}"
                      av:ItemsSource="{av:SampleData ItemCount=5}"
+                     SelectionChanged="usersList_SelectionChanged"
                      >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -85,7 +86,7 @@
                      VerticalAlignment="Stretch"
                      x:Name="concreteUsersChat"
                      FontSize="20" 
-                     ItemsSource="{Binding Metodes.BotUsersCollection, XPath=Messages}"
+                     ItemsSource="{Binding Metodes.BotUsersCollection}"
                      av:ItemsSource="{av:SampleData ItemCount=5}"
                      >
                 <!--<ListBox.ItemTemplate>
@@ -169,11 +170,13 @@
             </MenuItem>
             <MenuItem Header="Help"/>
         </Menu>
+        
         <TextBlock 
             x:Name="chatId"
             Grid.Column="3"
             Margin="660,4,39,273"
             Grid.Row="1"
+            Visibility="Hidden"
             TextWrapping="Wrap"
             Text="{Binding ElementName=usersList, Path=SelectedItem.ChatId}"
             FontSize="1"

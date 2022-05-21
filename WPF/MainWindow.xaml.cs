@@ -38,6 +38,9 @@ namespace WPF
         //static string TelegramToken = System.IO.File.ReadAllText(documentDirPath + toketFilePath);
 
 
+        /// <summary>
+        /// Главное окно бота
+        /// </summary>
         public MainWindow()
         {
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -53,6 +56,9 @@ namespace WPF
             usersList.ItemsSource = Metodes.BotUsersCollection; //установка источника данных
         }
 
+        /// <summary>
+        /// Открытие окна для ввода токена
+        /// </summary>
         internal void TokenInputWindowOpen()
         {
             TokenInput tokenInput = new TokenInput();
@@ -61,6 +67,9 @@ namespace WPF
             tokenInput.Show();
         }
 
+        /// <summary>
+        /// Определяем заголовок окна по имени бота, заполняем прямоугольник цветом
+        /// </summary>
         private void TelegramStatus()
         {
             this.Title = Metodes.Me.Username ?? "My awesome Bot";
@@ -98,7 +107,7 @@ namespace WPF
         /// </summary>
         private void btnSendMsg_Click(object sender, RoutedEventArgs e)
         {
-            _ = Metodes.SendText(Metodes.BotUsersCollection.First().ChatId, txtBxSendMsg.Text);
+            _ = Metodes.SendText(Convert.ToInt64(chatId.Text), txtBxSendMsg.Text);
 
             MessageBox.Show(chatId.Text);
 
@@ -146,5 +155,11 @@ namespace WPF
             Metodes.JsonFileWriteAsync(Metodes.BotUsersCollection, "BotUsers");
         }
 
+        private void usersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var user = Metodes.BotUsersCollection.Where(x => x.ChatId == Convert.ToInt64(chatId.Text)).First().Messages.ToList();
+
+            concreteUsersChat.ItemsSource = user;
+        }
     }
 }

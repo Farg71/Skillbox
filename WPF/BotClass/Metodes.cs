@@ -49,6 +49,7 @@ namespace WPF.BotClass
         internal static ObservableCollection<BotUser> BotUsersCollection { get; set; }
 
 
+
         /// <summary>
         /// Начало прослушивание ботом Телеграмканала
         /// </summary>
@@ -250,7 +251,7 @@ namespace WPF.BotClass
             if (BotUsersCollection.ToList().Exists(x => x.ChatId == chatId))
                 BotUsersCollection.ToList().Find(x => x.ChatId == chatId).AddMessage(false, DateTime.Now, text);
 
-            MessageBox.Show(text);
+            //MessageBox.Show(text);
 
             return await TelegramBot.SendTextMessageAsync(chatId: chatId,
                                                         text: text,

@@ -34,7 +34,7 @@ namespace WPF.BotClass
         /// Все сообщения. Кортеж (это сообщение пользователя?, время сообщения, текст сообщения)
         /// </summary>
         [JsonProperty(Required = Required.AllowNull)]
-        public List<(bool, DateTime, string?)> Messages { get; set; }
+        public ObservableCollection<(bool, DateTime, string?)> Messages { get; set; }
 
         /// <summary>
         /// Инициализация
@@ -54,7 +54,14 @@ namespace WPF.BotClass
             this.UserName = UserName;
             this.LanguageCode = LanguageCode;
             this.IsBot = IsBot;
-            Messages = new List<(bool, DateTime, string?)>();
+            Messages = new ObservableCollection<(bool, DateTime, string?)>();
+
+            Messages.CollectionChanged += Messages_CollectionChanged;
+        }
+
+        private void Messages_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -70,7 +77,7 @@ namespace WPF.BotClass
         /// <param name="other"></param>
         /// <returns></returns>
         public bool Equals(BotUser other) => other.ChatId == this.ChatId;
-
+        
         public override string ToString()
         {
             string name = String.Empty;
