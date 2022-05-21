@@ -107,11 +107,14 @@ namespace WPF
         /// </summary>
         private void btnSendMsg_Click(object sender, RoutedEventArgs e)
         {
-            _ = Metodes.SendText(Convert.ToInt64(chatId.Text), txtBxSendMsg.Text);
+            if (Metodes.status == Brushes.Green)
+            {
+                _ = Metodes.SendText(Convert.ToInt64(chatId.Text), txtBxSendMsg.Text);
 
-            MessageBox.Show(chatId.Text);
+                MessageBox.Show(chatId.Text);
 
-            txtBxSendMsg.Text = String.Empty;
+                txtBxSendMsg.Text = String.Empty;
+            }
         }
 
         /// <summary>
@@ -160,15 +163,13 @@ namespace WPF
             var user = Metodes.BotUsersCollection.Where(x => x.ChatId == Convert.ToInt64(chatId.Text)).First().Messages.ToList();
 
             //var u = user.Select((l) => $"{l.Item2} - {l.Item3}").Last();
-            //var u = user.Select((l) => $"{l.Item2.} - {l.Item3}");
+            //var u = user.Select((l) => $"{l.Item2.TimeOfDay} - {l.Item3}");
+            var u = user.Select((l) => $"{l.Item2} - {l.Item3}");
+            //var us = user.OrderByDescending(x => x.Item2);
 
-            var us = user.OrderByDescending(x => x.Item2);
-
-            var u = us.Select((l) => $"{l.Item2.TimeOfDay} - {l.Item3}");
-
+            //var u = us.Select((l) => $"{l.Item2.TimeOfDay} - {l.Item3}");
 
             concreteUsersChat.ItemsSource = u;
-
 
         }
     }
