@@ -13,6 +13,7 @@
     mc:Ignorable="d">
 
     <Grid>
+                
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5" />
             <ColumnDefinition Width="40*" />
@@ -67,7 +68,6 @@
             Click="btnCancel_Click"
             Content="Cancel"
             d:LayoutOverrides="Height" />
-
 
     </Grid>
 </Window>

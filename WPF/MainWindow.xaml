@@ -11,9 +11,11 @@
         MinHeight="100"
         Background="White"
         mc:Ignorable="av"
-        Closed="mainWindow_Closed" Activated="mainWindow_Activated" Closing="mainWindow_Closing"
+        Closed="mainWindow_Closed"
+        Activated="mainWindow_Activated"
+        Closing="mainWindow_Closing"
         >
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
@@ -43,17 +45,33 @@
 
             <ListBox HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
-                     x:Name="usersList">
+                     x:Name="usersList"
+                     ItemsSource="{Binding Metodes.BotUsersCollection}"
+                     av:ItemsSource="{av:SampleData ItemCount=5}"
+                     >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Padding="5" FontSize="20" Text="{Binding UserName}"/>
+                        <Border>
+                            <StackPanel Margin="5">
+                                <TextBlock
+                                    Margin="0"
+                                    Padding="5"
+                                    FontSize="12"
+                                    Text="{Binding FirstName}"/>
+                                <TextBlock
+                                    Margin="0"
+                                    Padding="5"
+                                    FontSize="12"
+                                    Text="{Binding ChatId}"/>
+                            </StackPanel>
+                        </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Border>
 
         <Border BorderBrush="Black"
-                Margin="5"
+                Margin="5,5,5,5"
                 CornerRadius="5"
                 Padding="5"
                 BorderThickness="1"
@@ -61,23 +79,30 @@
                 Grid.RowSpan="2"
                 Grid.Column="3">
 
+            <!--ItemsSource="{Binding ElementName=usersList, Path=SelectedItem.ChatId}"-->
+
             <ListBox HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
                      x:Name="concreteUsersChat"
-                     ItemsSource="{Binding ElementName=usersList, Path=SelectedItem.ChatId}"
-                     FontSize="20">
-                <ListBox.ItemTemplate>
+                     FontSize="20" 
+                     ItemsSource="{Binding Metodes.BotUsersCollection, XPath=Messages}"
+                     av:ItemsSource="{av:SampleData ItemCount=5}"
+                     >
+                <!--<ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="#FF2B5278"
+                        <Border Background="Gray"
                                 Margin="5"
                                 CornerRadius="5"
                                 Padding="15,5">
-                            <TextBlock Text="{Binding}" FontSize="20" Foreground="White"/>
+                            <TextBlock 
+                                Text="{Binding ElementName=usersList, Path=SelectedItem.ChatId}"
+                                FontSize="20"
+                                Foreground="White"/>
                         </Border>
 
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-                     <!--ItemsSource="{Binding ElementName=usersList, Path=SelectedItem.Messages.Item3}"-->
+                </ListBox.ItemTemplate>-->
+                <!--ItemsSource="{Binding ElementName=usersList, Path=SelectedItem.Messages.Item3}"-->
 
             </ListBox>
         </Border>
@@ -122,14 +147,14 @@
             Margin="0"
             Grid.ColumnSpan="6"
             Grid.Row="4">
-            
+
             <Label x:Name="labelStatus" Content="Telegram connection status:" />
             <Rectangle
                 x:Name="rectStatus"
                 Width="20"
                 Height="20"
                 Stroke="Black" />
-            
+
         </StatusBar>
 
         <Menu x:Name="menu" Grid.ColumnSpan="6">
@@ -137,13 +162,22 @@
                 <MenuItem x:Name="bot_Open"
                           Header="Telegram Bot Open"
                           Click="bot_Open_Click"/>
-                
+
                 <MenuItem x:Name="bot_Close"
                           Header="Telegram Bot Close"
                           Click="bot_Close_Click"/>
             </MenuItem>
             <MenuItem Header="Help"/>
         </Menu>
+        <TextBlock 
+            x:Name="chatId"
+            Grid.Column="3"
+            Margin="660,4,39,273"
+            Grid.Row="1"
+            TextWrapping="Wrap"
+            Text="{Binding ElementName=usersList, Path=SelectedItem.ChatId}"
+            FontSize="1"
+            />
 
     </Grid>
 </Window>

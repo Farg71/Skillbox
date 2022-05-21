@@ -98,7 +98,9 @@ namespace WPF
         /// </summary>
         private void btnSendMsg_Click(object sender, RoutedEventArgs e)
         {
-            _ = Metodes.SendText(Metodes.BotUsersCollection.Last().ChatId, txtBxSendMsg.Text);
+            _ = Metodes.SendText(Metodes.BotUsersCollection.First().ChatId, txtBxSendMsg.Text);
+
+            MessageBox.Show(chatId.Text);
 
             txtBxSendMsg.Text = String.Empty;
         }

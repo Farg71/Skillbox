@@ -51,6 +51,96 @@
         "Item1": false,
         "Item2": "2022-05-18T01:57:21.7953099+03:00",
         "Item3": "fffrr"
+      },
+      {
+        "Item1": true,
+        "Item2": "2022-05-18T06:58:11Z",
+        "Item3": "cjm"
+      },
+      {
+        "Item1": false,
+        "Item2": "2022-05-18T10:05:52.9997618+03:00",
+        "Item3": "sdgf"
+      },
+      {
+        "Item1": false,
+        "Item2": "2022-05-21T17:30:38.8348988+03:00",
+        "Item3": "dgr"
+      },
+      {
+        "Item1": false,
+        "Item2": "2022-05-21T17:39:09.9719059+03:00",
+        "Item3": "vbn"
+      },
+      {
+        "Item1": false,
+        "Item2": "2022-05-21T18:02:56.4351778+03:00",
+        "Item3": "fhn"
+      },
+      {
+        "Item1": false,
+        "Item2": "2022-05-21T18:03:04.3211886+03:00",
+        "Item3": "tyj"
+      },
+      {
+        "Item1": false,
+        "Item2": "2022-05-21T18:38:43.8471676+03:00",
+        "Item3": "dfg"
+      }
+    ]
+  },
+  {
+    "ChatId": 1908216741,
+    "FirstName": "Виктория",
+    "LastName": null,
+    "UserName": null,
+    "LanguageCode": "ru",
+    "IsBot": false,
+    "Messages": [
+      {
+        "Item1": true,
+        "Item2": "2022-05-17T22:57:08Z",
+        "Item3": "/start"
+      }
+    ]
+  },
+  {
+    "ChatId": 1968570302,
+    "FirstName": "Yuki",
+    "LastName": null,
+    "UserName": "Fresh22000",
+    "LanguageCode": "ru",
+    "IsBot": false,
+    "Messages": [
+      {
+        "Item1": true,
+        "Item2": "2022-05-17T22:57:08Z",
+        "Item3": "/start"
+      },
+      {
+        "Item1": false,
+        "Item2": "2022-05-18T09:57:34.0525855+03:00",
+        "Item3": "rth"
+      },
+      {
+        "Item1": false,
+        "Item2": "2022-05-18T09:57:44.0204805+03:00",
+        "Item3": "rxhter"
+      },
+      {
+        "Item1": false,
+        "Item2": "2022-05-18T09:59:41.5786878+03:00",
+        "Item3": "redgedg"
+      },
+      {
+        "Item1": false,
+        "Item2": "2022-05-18T10:01:34.2190683+03:00",
+        "Item3": "sg"
+      },
+      {
+        "Item1": false,
+        "Item2": "2022-05-18T10:03:14.1870518+03:00",
+        "Item3": "erg"
       }
     ]
   }
